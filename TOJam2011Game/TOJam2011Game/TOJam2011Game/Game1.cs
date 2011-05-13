@@ -19,10 +19,15 @@ namespace TOJam2011Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        PlayerObject player1;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            
+
         }
 
 
@@ -31,6 +36,16 @@ namespace TOJam2011Game
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+
+            // creating objects here
+            player1 = new PlayerObject(this, spriteBatch);
+
+
+            // adding to components here
+            Components.Add(player1);
+
 
             base.Initialize();
         }
@@ -40,10 +55,8 @@ namespace TOJam2011Game
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+       
 
-            // TODO: use this.Content to load your game content here
         }
 
 
@@ -77,7 +90,14 @@ namespace TOJam2011Game
 
             // TODO: Add your drawing code here
 
+            spriteBatch.Begin();
+
+
             base.Draw(gameTime);
+
+
+
+            spriteBatch.End();
         }
 
 
