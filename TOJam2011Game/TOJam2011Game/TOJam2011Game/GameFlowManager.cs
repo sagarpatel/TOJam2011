@@ -15,13 +15,96 @@ namespace TOJam2011Game
 {
 
 
-    public class GameFlowManager: Microsoft.Xna.Framework.GameComponent
+    public class GameFlowManager: Microsoft.Xna.Framework.DrawableGameComponent
     {
+        public PlayerObject player1;
+        public Level1Screen level1Screen;
+        public Level2Screen level2Screen;
 
-        public GameFlowManager(Game game):base(game)
+        public GameFlowManager(Game game, SpriteBatch sB):base(game)
         {
+            player1 = new PlayerObject(game, sB);
+            level1Screen = new Level1Screen(game, sB);
+            level2Screen = new Level2Screen(game, sB);
+
 
         }
+
+
+
+
+
+        public override void Initialize()
+        {
+           
+            Game.Components.Add(player1);
+            Game.Components.Add(level1Screen);
+
+
+            base.Initialize();
+        }
+
+
+
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+        }
+
+
+
+
+
+
+
+        public override void Update(GameTime gameTime)
+        {
+            //basic level flow
+            // assuming level1 is already active
+            if (level1Screen.isCompleted)
+            {
+                //kill the level
+                level1Screen.isActive = false;
+                Game.Components.Remove(level1Screen);
+                //Put next level
+                level2Screen.isActive = true;
+                level2Screen.isCompleted = false;
+                Game.Components.Add(level2Screen);
+                
+            }
+
+
+
+
+
+            base.Update(gameTime);
+        }
+
+
+
+
+        //There should be nothing to draw
+        public override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+
+
+        }
+
+
+
+
+
+
+
+
+
 
     }
 

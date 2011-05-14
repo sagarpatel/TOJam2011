@@ -19,9 +19,8 @@ namespace TOJam2011Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        PlayerObject player1;
 
-        Level1Screen level1Screen;
+        GameFlowManager gameflowManager;
         
         public Game1()
         {
@@ -41,16 +40,9 @@ namespace TOJam2011Game
             // TODO: Add your initialization logic here
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            gameflowManager = new GameFlowManager(this, spriteBatch);
 
-            // creating objects here
-            player1 = new PlayerObject(this, spriteBatch);
-
-            level1Screen = new Level1Screen(this, spriteBatch);
-
-            // adding to components here
-            Components.Add(player1);
-           // Components.Add(level1Screen);
-            
+        //    Components.Add(gameflowManager);
 
             base.Initialize();
         }

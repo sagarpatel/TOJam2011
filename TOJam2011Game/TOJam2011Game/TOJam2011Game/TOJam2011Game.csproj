@@ -116,6 +116,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="ScreenObjects\Level1Screen.cs" />
+    <Compile Include="ScreenObjects\Level2Screen.cs" />
     <Compile Include="ScreenObjects\ScreenObject.cs" />
   </ItemGroup>
   <ItemGroup>

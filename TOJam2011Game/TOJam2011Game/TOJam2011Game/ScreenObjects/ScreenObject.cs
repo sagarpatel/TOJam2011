@@ -18,9 +18,9 @@ namespace TOJam2011Game
     public abstract class ScreenObject : Microsoft.Xna.Framework.DrawableGameComponent
     {
 
-        protected bool isActive;
-        protected bool isLoaded;
-        protected bool isCompleted;
+        public bool isActive;
+        public bool isLoaded;
+        public bool isCompleted;
 
         protected SpriteBatch spriteBatch;
 

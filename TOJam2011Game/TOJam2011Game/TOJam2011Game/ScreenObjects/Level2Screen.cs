@@ -15,14 +15,15 @@ namespace TOJam2011Game
 {
 
 
-    public class Level1Screen:ScreenObject
+    public class Level2Screen: ScreenObject
     {
 
 
         SpriteFont spriteFont1;
 
 
-        public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
+        public Level2Screen(Game game, SpriteBatch sB)
+            : base(game, sB)
         {
 
 
@@ -37,7 +38,7 @@ namespace TOJam2011Game
 
         protected override void LoadContent()
         {
-            
+
             //base.LoadContent();
         }
 
@@ -57,10 +58,10 @@ namespace TOJam2011Game
         public override void Draw(GameTime gameTime)
         {
 
-          //  spriteBatch.Draw stuff here
+            //  spriteBatch.Draw stuff here
 
-            spriteBatch.DrawString(spriteFont1,"test1", new Vector2(400, 0), Color.Green);
-                
+            spriteBatch.DrawString(spriteFont1, "test2", new Vector2(400, 0), Color.Green);
+
 
             base.Draw(gameTime);
         }

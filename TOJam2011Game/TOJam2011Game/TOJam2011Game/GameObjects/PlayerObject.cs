@@ -36,7 +36,7 @@ namespace TOJam2011Game
             for (int i = 0; i < maxcount_weapon1; i++)
             {
                 weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
-                Game.Components.Add(weapon1[i]);
+             //   Game.Components.Add(weapon1[i]);
             }
 
 
@@ -44,11 +44,33 @@ namespace TOJam2011Game
             for (int i = 0; i < maxcount_weapon2; i++)
             {
                 weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
-                Game.Components.Add(weapon2[i]);
+              //  Game.Components.Add(weapon2[i]);
                 weapon2[i].position = new Vector2(20, 200);
             }
 
             
+        }
+
+
+        public override void Initialize()
+        {
+
+            for (int i = 0; i < maxcount_weapon1; i++)
+            {   
+                Game.Components.Add(weapon1[i]);
+            }
+
+
+          
+            for (int i = 0; i < maxcount_weapon2; i++)
+            {
+                
+                Game.Components.Add(weapon2[i]);
+                weapon2[i].position = new Vector2(20, 200);
+            }
+
+
+            base.Initialize();
         }
 
 
