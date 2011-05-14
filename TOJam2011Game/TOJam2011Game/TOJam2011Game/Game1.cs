@@ -26,7 +26,8 @@ namespace TOJam2011Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            
+            graphics.PreferredBackBufferWidth = 720;
+            graphics.PreferredBackBufferHeight = 480;
 
         }
 
@@ -86,11 +87,11 @@ namespace TOJam2011Game
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
 
 
             base.Draw(gameTime);

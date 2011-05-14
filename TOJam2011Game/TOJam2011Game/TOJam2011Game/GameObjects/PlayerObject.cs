@@ -18,13 +18,41 @@ namespace TOJam2011Game
     public class PlayerObject : GameObject
     {
 
+        WeaponObject[] weapon1;
+        WeaponObject[] weapon2;
 
+        int maxcount_weapon1;
+        int maxcount_weapon2;
 
 
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
             position = new Vector2(10, 10);
- 
+
+            maxcount_weapon1 = 10;
+            maxcount_weapon2 = 20;
+
+            weapon1 = new WeaponObject[maxcount_weapon1];
+
+            for (int i = 0; i < maxcount_weapon1; i++)
+            {
+                weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
+                Game.Components.Add(weapon1[i]);
+            }
+
+
+            weapon2 = new WeaponObject[maxcount_weapon2];
+            for (int i = 0; i < maxcount_weapon2; i++)
+            {
+                weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
+                Game.Components.Add(weapon2[i]);
+                weapon2[i].position = new Vector2(20, 200);
+            }
+
+            
+           
+            
+
         }
 
 
@@ -33,12 +61,13 @@ namespace TOJam2011Game
         {
 
 
-            texture = Game.Content.Load<Texture2D>("Sprites/gclV1");
+            texture = Game.Content.Load<Texture2D>("Sprites/GCLV3");
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
             position = new Vector2(200, 100);
 
-         
+
+                     
             //base.LoadContent();
         }
 

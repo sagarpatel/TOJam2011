@@ -26,6 +26,7 @@ namespace TOJam2011Game
         public Texture2D texture;
 
         public bool isAlive;
+        public bool isSolid;
 
         public Vector2 position;
         public Vector2 velocity;
@@ -52,9 +53,9 @@ namespace TOJam2011Game
 
             origin = new Vector2(0, 0);
 
-
-
         }
+
+
 
         public override void Initialize()
         {
@@ -66,7 +67,7 @@ namespace TOJam2011Game
             base.LoadContent();
         }
 
-        protected virtual void UnloadContent()
+        protected override void UnloadContent()
         {
             base.UnloadContent();
         }
@@ -89,10 +90,6 @@ namespace TOJam2011Game
 
 
         }
-
-
-
-
 
 
 
