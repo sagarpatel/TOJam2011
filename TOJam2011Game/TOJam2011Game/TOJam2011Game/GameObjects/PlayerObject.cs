@@ -37,7 +37,7 @@ namespace TOJam2011Game
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
             position = new Vector2(10, 10);
-            speed = 1f;
+            speed = 2f;
             friction = 0.15f;
             maxcount_weapon1 = 10;
             maxcount_weapon2 = 20;

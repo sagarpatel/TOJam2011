@@ -72,6 +72,22 @@ namespace TOJam2011Game
 
 
 
+        public Vector2 GenerateRandomPositionOutside()
+        {
+            //radius of 1337
+
+            float radius = 1337;
+
+            Random rand = new Random();
+            
+            float x = radius*(float)Math.Cos(2*Math.PI* rand.NextDouble());
+            float y = radius * (float)Math.Sin(2 * Math.PI * rand.NextDouble());
+
+            Vector2 pos = new Vector2(x, y);
+            return pos;
+
+        }
+
 
     }
 

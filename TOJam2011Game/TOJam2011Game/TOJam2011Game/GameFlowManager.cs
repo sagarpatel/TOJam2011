@@ -29,8 +29,6 @@ namespace TOJam2011Game
             level1Screen = new Level1Screen(game, sB);
             level2Screen = new Level2Screen(game, sB);
 
-            
-
         }
 
 
@@ -83,11 +81,8 @@ namespace TOJam2011Game
                 level2Screen.isActive = true;
                 level2Screen.isCompleted = false;
                 Game.Components.Add(level2Screen);
-                
+
             }
-
-
-
 
 
             base.Update(gameTime);
@@ -100,7 +95,6 @@ namespace TOJam2011Game
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-
 
         }
 

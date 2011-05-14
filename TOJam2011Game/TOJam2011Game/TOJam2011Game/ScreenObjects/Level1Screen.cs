@@ -24,14 +24,18 @@ namespace TOJam2011Game
 
         EnemyObject enemy1;
 
+        Vector2 itargetPosition;
+
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
             isActive = true;
 
+            itargetPosition = new Vector2(100, 100);
+
             // set up level content
-            enemy1 = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/IE9V1"));
-            enemy1.position = new Vector2(400, 250);
+            enemy1 = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
+            enemy1.position = GenerateRandomPositionOutside();
 
             Game.Components.Add(enemy1);
             
@@ -60,6 +64,11 @@ namespace TOJam2011Game
             // Level logic update here
 
             HandleEnemies();
+
+            enemy1.position.X = MathHelper.Lerp(enemy1.position.X, itargetPosition.X, 0.05f);
+            enemy1.position.Y = MathHelper.Lerp(enemy1.position.Y, itargetPosition.Y, 0.05f);
+
+            
 
             //Level Completion condition
             if (enemy1.isKilled)

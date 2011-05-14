@@ -19,7 +19,6 @@ namespace TOJam2011Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-       
 
         GameFlowManager gameflowManager;
         
@@ -28,8 +27,8 @@ namespace TOJam2011Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 720;
-            graphics.PreferredBackBufferHeight = 480;
+            graphics.PreferredBackBufferWidth = 1111;
+            graphics.PreferredBackBufferHeight = 720;
 
         }
 
@@ -42,7 +41,6 @@ namespace TOJam2011Game
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             gameflowManager = new GameFlowManager(this, spriteBatch);
-
             Components.Add(gameflowManager);
 
             base.Initialize();
@@ -92,10 +90,7 @@ namespace TOJam2011Game
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
 
-
             base.Draw(gameTime);
-
-
 
             spriteBatch.End();
         }
