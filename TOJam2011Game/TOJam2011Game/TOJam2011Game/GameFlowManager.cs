@@ -17,7 +17,7 @@ namespace TOJam2011Game
 
     public class GameFlowManager: Microsoft.Xna.Framework.DrawableGameComponent
     {
-        public PlayerObject player1;
+        public static PlayerObject player1;
         public Level1Screen level1Screen;
         public Level2Screen level2Screen;
 
@@ -29,6 +29,7 @@ namespace TOJam2011Game
             level1Screen = new Level1Screen(game, sB);
             level2Screen = new Level2Screen(game, sB);
 
+            
 
         }
 
@@ -38,7 +39,9 @@ namespace TOJam2011Game
 
         public override void Initialize()
         {
-           
+            level1Screen.isActive = true;
+            level2Screen.isActive = false;
+
             Game.Components.Add(player1);
             Game.Components.Add(level1Screen);
 
@@ -69,7 +72,7 @@ namespace TOJam2011Game
         {
             //basic level flow
             // assuming level1 is already active
-            if (level1Screen.isCompleted)
+            if (level1Screen.isCompleted == true && level2Screen.isActive == false)
             {
                 //kill the level
                 level1Screen.isActive = false;

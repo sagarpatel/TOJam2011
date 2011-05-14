@@ -21,15 +21,20 @@ namespace TOJam2011Game
 
         SpriteFont spriteFont1;
 
-        
+
+        EnemyObject enemy1;
+
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
-
-
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
-            
             isActive = true;
 
+            // set up level content
+            enemy1 = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/IE9V1"));
+            enemy1.position = new Vector2(400, 250);
+
+            Game.Components.Add(enemy1);
+            
         }
 
 
@@ -53,7 +58,16 @@ namespace TOJam2011Game
         public override void Update(GameTime gameTime)
         {
             // Level logic update here
-            
+
+            HandleEnemies();
+
+            //Level Completion condition
+            if (enemy1.isKilled)
+            {
+                isCompleted = true;
+            }
+
+
             base.Update(gameTime);
 
         }
@@ -73,7 +87,34 @@ namespace TOJam2011Game
         }
 
 
+        public void HandleEnemies()
+        {
+            // Collision with weapons check
 
+            foreach (KeyValuePair<int, WeaponObject[]> entry in GameFlowManager.player1.weaponDict)
+            {
+                foreach (WeaponObject w in entry.Value)
+                {
+                    if (w.isAlive && w.isSolid)
+                    {
+                        if (enemy1.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                        {
+                            w.isAlive = false;
+                            enemy1.isAlive = false;
+                            enemy1.isKilled = true;
+                        }
+                    }
+                }
+            }
+
+            if (enemy1.isKilled == true && enemy1.isAlive == false)
+            {
+                Game.Components.Remove(enemy1);
+                enemy1.Dispose();
+            }
+
+
+        }
 
 
 

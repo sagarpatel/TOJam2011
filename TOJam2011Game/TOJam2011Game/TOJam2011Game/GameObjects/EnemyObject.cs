@@ -17,13 +17,13 @@ namespace TOJam2011Game
 
     public class EnemyObject: GameObject
     {
-
+        public bool isKilled;
 
         public EnemyObject(Game game, SpriteBatch sB, Texture2D passedTexture): base(game, sB)
         {
-
             texture = passedTexture;
-
+            isAlive = true;
+            isKilled = false;
         }
 
 
@@ -39,9 +39,6 @@ namespace TOJam2011Game
         public override void Update(GameTime gameTime)
         {
             // Player Update Code Here
-
-            position += 0.01f * position;
-
 
             
             base.Update(gameTime);
