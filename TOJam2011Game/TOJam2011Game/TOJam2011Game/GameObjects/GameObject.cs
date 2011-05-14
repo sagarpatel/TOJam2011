@@ -110,6 +110,12 @@ namespace TOJam2011Game
         }
 
 
+        protected virtual void UpdatePV()
+        {
+
+            position += velocity*(1-friction);
+
+        }
 
 
 

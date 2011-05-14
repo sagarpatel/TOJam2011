@@ -47,6 +47,8 @@ namespace TOJam2011Game
 
         protected override void UnloadContent()
         {
+            isLoaded = false;
+
             base.UnloadContent();
         }
 

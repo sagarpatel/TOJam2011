@@ -18,17 +18,20 @@ namespace TOJam2011Game
     public class PlayerObject : GameObject
     {
 
-        WeaponObject[] weapon1;
-        WeaponObject[] weapon2;
+        public WeaponObject[] weapon1;
+        public WeaponObject[] weapon2;
 
-        int maxcount_weapon1;
-        int maxcount_weapon2;
+        public int maxcount_weapon1;
+        public int maxcount_weapon2;
+
+        public InputHandler inputHandler;
 
 
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
             position = new Vector2(10, 10);
-
+            speed = 1f;
+            friction = 0.1f;
             maxcount_weapon1 = 10;
             maxcount_weapon2 = 20;
 
@@ -48,6 +51,10 @@ namespace TOJam2011Game
                 weapon2[i].position = new Vector2(20, 200);
             }
 
+
+            // for player2 controls
+            inputHandler = new InputHandler(game,1);
+            Game.Components.Add(inputHandler);
             
         }
 
@@ -60,7 +67,7 @@ namespace TOJam2011Game
                 Game.Components.Add(weapon1[i]);
             }
 
-
+            
           
             for (int i = 0; i < maxcount_weapon2; i++)
             {
@@ -94,6 +101,8 @@ namespace TOJam2011Game
         {
             // Player Update Code Here
 
+            velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
+            UpdatePV();
 
             base.Update(gameTime);
 
@@ -113,6 +122,19 @@ namespace TOJam2011Game
             base.Draw(gameTime);
         }
 
+
+
+
+        ///Non Drawablecomponents functions
+        ///
+
+        protected override void UpdatePV()
+        {
+
+            position += speed *velocity * (1f - friction);
+
+            base.UpdatePV();
+        }
 
 
 

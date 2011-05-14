@@ -19,6 +19,7 @@ namespace TOJam2011Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+       
 
         GameFlowManager gameflowManager;
         
@@ -42,7 +43,7 @@ namespace TOJam2011Game
 
             gameflowManager = new GameFlowManager(this, spriteBatch);
 
-        //    Components.Add(gameflowManager);
+            Components.Add(gameflowManager);
 
             base.Initialize();
         }

@@ -21,6 +21,8 @@ namespace TOJam2011Game
         public Level1Screen level1Screen;
         public Level2Screen level2Screen;
 
+
+
         public GameFlowManager(Game game, SpriteBatch sB):base(game)
         {
             player1 = new PlayerObject(game, sB);
@@ -72,6 +74,8 @@ namespace TOJam2011Game
                 //kill the level
                 level1Screen.isActive = false;
                 Game.Components.Remove(level1Screen);
+                level1Screen.Dispose();
+          
                 //Put next level
                 level2Screen.isActive = true;
                 level2Screen.isCompleted = false;
