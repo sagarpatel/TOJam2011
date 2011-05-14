@@ -28,6 +28,8 @@ namespace TOJam2011Game
         public bool isAlive;
         public bool isSolid;
 
+        public int HP;
+
         public Vector2 position;
         public Vector2 velocity;
 
@@ -47,7 +49,8 @@ namespace TOJam2011Game
         {
             spriteBatch = sB;
 
-            isAlive = false;
+            isAlive = true;
+            isSolid = true;
             position = new Vector2(0, 0);
             velocity = new Vector2(0, 0);
 
@@ -92,6 +95,19 @@ namespace TOJam2011Game
         }
 
 
+        public bool CheckCollision(Vector2 otherpos, int W, int H)
+        {
+
+            Rectangle myRec = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            Rectangle otherRec = new Rectangle((int)otherpos.X, (int)otherpos.Y, W, H);
+
+            if (myRec.Intersects(otherRec))
+                return true;
+            else
+                return false;
+
+
+        }
 
 
 

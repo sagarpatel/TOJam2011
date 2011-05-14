@@ -33,7 +33,6 @@ namespace TOJam2011Game
             maxcount_weapon2 = 20;
 
             weapon1 = new WeaponObject[maxcount_weapon1];
-
             for (int i = 0; i < maxcount_weapon1; i++)
             {
                 weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
@@ -50,9 +49,6 @@ namespace TOJam2011Game
             }
 
             
-           
-            
-
         }
 
 
@@ -77,10 +73,9 @@ namespace TOJam2011Game
             // Player Update Code Here
 
 
-
-
-
             base.Update(gameTime);
+
+            
 
         }
 

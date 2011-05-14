@@ -10,34 +10,28 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
+
 namespace TOJam2011Game
 {
 
 
-    public class WeaponObject : GameObject
+    public class EnemyObject: GameObject
     {
 
 
-        public WeaponObject(Game game, SpriteBatch sB, Texture2D passedTexture): base(game, sB)
+        public EnemyObject(Game game, SpriteBatch sB, Texture2D passedTexture): base(game, sB)
         {
 
-            position = new Vector2(10, 10);
             texture = passedTexture;
- 
+
         }
+
 
 
 
         protected override void LoadContent()
         {
 
-
-         //   texture = Game.Content.Load<Texture2D>("PATHTOWEAPONSPRITE");
-            //origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
-
-            //position = new Vector2(20, 40);
-
-         
             //base.LoadContent();
         }
 
@@ -48,6 +42,8 @@ namespace TOJam2011Game
 
             position += 0.01f * position;
 
+
+            
             base.Update(gameTime);
 
         }
@@ -65,7 +61,10 @@ namespace TOJam2011Game
 
 
 
+
+
     }
+
 
 
 
