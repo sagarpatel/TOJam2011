@@ -20,6 +20,8 @@ namespace TOJam2011Game
         SpriteBatch spriteBatch;
 
         PlayerObject player1;
+
+        Level1Screen level1Screen;
         
         public Game1()
         {
@@ -43,10 +45,12 @@ namespace TOJam2011Game
             // creating objects here
             player1 = new PlayerObject(this, spriteBatch);
 
+            level1Screen = new Level1Screen(this, spriteBatch);
 
             // adding to components here
             Components.Add(player1);
-
+           // Components.Add(level1Screen);
+            
 
             base.Initialize();
         }

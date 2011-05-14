@@ -20,6 +20,7 @@ namespace TOJam2011Game
 
         protected bool isActive;
         protected bool isLoaded;
+        protected bool isCompleted;
 
         protected SpriteBatch spriteBatch;
 
@@ -28,6 +29,7 @@ namespace TOJam2011Game
             spriteBatch = sB;
             isActive = false;
             isLoaded = false;
+            isCompleted = false;
 
         }
 
