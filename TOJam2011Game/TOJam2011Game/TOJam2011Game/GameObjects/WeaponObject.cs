@@ -17,12 +17,15 @@ namespace TOJam2011Game
     public class WeaponObject : GameObject
     {
 
+        public int fireRate;
 
         public WeaponObject(Game game, SpriteBatch sB, Texture2D passedTexture): base(game, sB)
         {
 
             position = new Vector2(10, 10);
             texture = passedTexture;
+            isAlive = false;
+            fireRate = 1;
  
         }
 
@@ -46,7 +49,7 @@ namespace TOJam2011Game
         {
             // Player Update Code Here
 
-            position += 0.01f * position;
+            UpdatePV();
 
             base.Update(gameTime);
 
@@ -57,10 +60,22 @@ namespace TOJam2011Game
 
         public override void Draw(GameTime gameTime)
         {
-
-            spriteBatch.Draw(texture, position, Color.White);
+            if (isAlive)
+            {
+                spriteBatch.Draw(texture, position, Color.White);
+            }
 
             base.Draw(gameTime);
+        }
+
+
+
+        protected override void UpdatePV()
+        {
+            velocity = velocity * (1f - friction);
+            position += speed * velocity;
+
+            base.UpdatePV();
         }
 
 
