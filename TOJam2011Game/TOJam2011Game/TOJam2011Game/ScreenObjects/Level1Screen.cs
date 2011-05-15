@@ -39,7 +39,7 @@ namespace TOJam2011Game
             // set up level content
             iTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
             iTitle.targetPosition = new Vector2(700, 150);
-            iTitle.position = -iTitle.targetPosition;
+            iTitle.position = -10f*iTitle.targetPosition;
 
             iiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/ImprobableV2"));
             iiTitle.position = GenerateRandomPositionOutside();
@@ -198,25 +198,25 @@ namespace TOJam2011Game
         {
 
             //Send first message to position
-            iTitle.position.X = MathHelper.Lerp(iTitle.position.X, iTitle.targetPosition.X, 0.05f);
-            iTitle.position.Y = MathHelper.Lerp(iTitle.position.Y, iTitle.targetPosition.Y, 0.05f);
+            iTitle.position.X = MathHelper.Lerp(iTitle.position.X, iTitle.targetPosition.X, 0.09f);
+            iTitle.position.Y = MathHelper.Lerp(iTitle.position.Y, iTitle.targetPosition.Y, 0.09f);
 
             //check if first message arrived
             if (Math.Round((double)iTitle.position.X) == (double)iTitle.targetPosition.X)
             {
                 //send second message
-                iiTitle.position.X = MathHelper.Lerp(iiTitle.position.X, iiTitle.targetPosition.X, 0.05f);
-                iiTitle.position.Y = MathHelper.Lerp(iiTitle.position.Y, iiTitle.targetPosition.Y, 0.05f);
+                iiTitle.position.X = MathHelper.Lerp(iiTitle.position.X, iiTitle.targetPosition.X, 0.095f);
+                iiTitle.position.Y = MathHelper.Lerp(iiTitle.position.Y, iiTitle.targetPosition.Y, 0.095f);
                 iiTitle.rotation = MathHelper.Lerp(iiTitle.rotation, iiTitle.targetRotation, 0.05f);
                 // check is second message has arrived
                 if (Math.Round((double)iiTitle.position.X) == (double)iiTitle.targetPosition.X)
                 {
                     //send third message
-                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.03f);
-                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.03f);
+                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.075f);
+                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.075f);
                     //Shaky feel code
                     iiiTitle.isShaky = true;
-                    iiiTitle.initialShake = MathHelper.Lerp(iiTitle.initialShake, 100f, 0.1f);
+                    iiiTitle.initialShake = MathHelper.Lerp(iiTitle.initialShake, 100f, 0.9f);
                   
                     //check if third message has arrived
                     if (Math.Round((double)iiiTitle.position.X) == (double)iiiTitle.targetPosition.X)

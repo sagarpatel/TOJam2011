@@ -27,7 +27,7 @@ namespace TOJam2011Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1111;
+            graphics.PreferredBackBufferWidth = 1080;
             graphics.PreferredBackBufferHeight = 720;
 
         }
