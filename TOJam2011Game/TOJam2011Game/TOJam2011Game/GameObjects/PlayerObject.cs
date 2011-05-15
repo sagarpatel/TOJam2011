@@ -35,6 +35,9 @@ namespace TOJam2011Game
         public int fireRate_weapon2;
 
         public bool isControllable;
+        public bool isMoveable;
+
+        public int APressedCount;
 
         public int activeTextureID;
 
@@ -44,6 +47,9 @@ namespace TOJam2011Game
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
             isControllable = true;
+            isMoveable = true;
+            APressedCount = 0;
+
             //position = new Vector2(10, 10);
             speed = 2f;
             friction = 0.15f;
@@ -84,10 +90,13 @@ namespace TOJam2011Game
             weaponDict.Add(2, weapon2);
 
             textureList = new List<Texture2D>();
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2")); //element 0
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/heyouV1"));
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/ouch"));
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/hit_a"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/pewpew"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/moveme")); //element 5
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/goodjob"));
 
             // for player2 controls
             inputHandler = new InputHandler(game,1);
@@ -188,6 +197,7 @@ namespace TOJam2011Game
                             {
                                 w.isAlive = true;
                                 w.position = position;
+                                APressedCount += 1;
                                 break;
                             }
                         }
@@ -212,15 +222,16 @@ namespace TOJam2011Game
             if (inputHandler.gamepadState.Buttons.A == ButtonState.Pressed)
             {
                 FireWeapon(2, gameTime);
+                
             }
 
 
-
-
-            ///PV
-            velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
-            velocity.Y -= inputHandler.gamepadState.ThumbSticks.Left.Y;
-
+            if (isMoveable)
+            {
+                ///PV
+                velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
+                velocity.Y -= inputHandler.gamepadState.ThumbSticks.Left.Y;
+            }
 
         }
 

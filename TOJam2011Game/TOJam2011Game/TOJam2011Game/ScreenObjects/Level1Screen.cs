@@ -28,10 +28,13 @@ namespace TOJam2011Game
         bool isintroComplete;
         bool istutorialComplete;
         bool isPlayerLaunched;
+        bool ismovingComplete;
 
         Rectangle screenRectangle;
 
         PlayerObject mainPlayer;
+
+        double timeCount;
 
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
@@ -40,19 +43,21 @@ namespace TOJam2011Game
             isCompleted = false;
             isintroComplete = false;
             istutorialComplete = false;
+            ismovingComplete = false;
+            
             isPlayerLaunched = false;
 
             screenRectangle = new Rectangle(0, 0, Game1.screenWidth,Game1.screenHeight);
                       
             // set up level content
             iTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
-            iTitle.targetPosition = new Vector2(700, 150);
+            iTitle.targetPosition = new Vector2(650, 150);
             iTitle.position = -10f*iTitle.targetPosition;
 
             iiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/ImprobableV2"));
             iiTitle.position = GenerateRandomPositionOutside();
             iiTitle.rotation = 0f;
-            iiTitle.targetPosition = new Vector2(300, 350);
+            iiTitle.targetPosition = new Vector2(450, 350);
             iiTitle.targetRotation = 20f * (float)Math.PI;
 
 
@@ -68,9 +73,10 @@ namespace TOJam2011Game
             mainPlayer = GameFlowManager.player1;
 
             mainPlayer.isControllable = false;
+            mainPlayer.isMoveable = false;
             mainPlayer.activeTextureID = 1;
 
-            
+            timeCount = 0;
             
         }
 
@@ -136,17 +142,31 @@ namespace TOJam2011Game
                     }
 
                 }
+
+                if (mainPlayer.APressedCount>1)
+                {
+                    mainPlayer.activeTextureID = 4;
+                }
           
                 HandleEnemies();
             }
-            
 
-            
+
+            timeCount += gameTime.ElapsedGameTime.TotalMilliseconds;
 
             //Level Completion condition
             if (iTitle.isKilled && iiTitle.isKilled && iiiTitle.isKilled)
             {
-                isCompleted = true;
+                mainPlayer.activeTextureID = 5;
+                mainPlayer.isMoveable = true;
+
+                if (mainPlayer.velocity.Length() > 5f)
+                {
+                    mainPlayer.activeTextureID = 6;
+                    istutorialComplete = true;
+                    isCompleted = true;
+                }
+
             }
 
 
