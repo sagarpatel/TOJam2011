@@ -24,6 +24,7 @@ namespace TOJam2011Game
         public bool isShaky;
         public bool isActive;
         public float initialShake;
+        public bool isWallBouncing;
 
         public TitleObject(Game game,SpriteBatch sB,Texture2D passedTexture):base(game,sB)
         {
@@ -31,6 +32,7 @@ namespace TOJam2011Game
             isActive = false;
             texture = passedTexture;
             initialShake = 0f;
+            isWallBouncing = false;
         }
 
 
@@ -47,8 +49,13 @@ namespace TOJam2011Game
         {
             // Player Update Code Here
 
+            if (isWallBouncing)
+            {
+                WallBounce(texture);
+            }
+
             UpdatePV();
-            base.Update(gameTime);
+          //  base.Update(gameTime);
 
         }
 
@@ -57,6 +64,7 @@ namespace TOJam2011Game
 
         public override void Draw(GameTime gameTime)
         {
+
 
             if (isShaky)
             {
@@ -70,11 +78,23 @@ namespace TOJam2011Game
 
             else
             {
-                spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+                if (isUnFading)
+                {
+                   // colorLerp = Color.Lerp(colorLerp, Color.White, UnFadingLerp);
+                    colorLerp.R = (byte)customRGBA;
+                    colorLerp.G = (byte)customRGBA;
+                    colorLerp.B = (byte)customRGBA;
+                    colorLerp.A = (byte)customRGBA;
+                    spriteBatch.Draw(texture, position, null, colorLerp, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+                }
+                else
+                {
+                    spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+                }
             }
 
 
-            base.Draw(gameTime);
+         //   base.Draw(gameTime);
         }
 
 
@@ -83,7 +103,7 @@ namespace TOJam2011Game
             velocity = velocity * (1f - friction);
             position += speed * velocity;
 
-            base.UpdatePV();
+            //base.UpdatePV();
         }
 
 

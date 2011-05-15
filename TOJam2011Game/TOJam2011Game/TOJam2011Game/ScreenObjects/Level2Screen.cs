@@ -32,6 +32,9 @@ namespace TOJam2011Game
 
         double timeCounter;
 
+        float totalAngularVelocity;
+
+
         public Level2Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             isActive = true;
@@ -55,14 +58,14 @@ namespace TOJam2011Game
             startthelearning = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/startthelearning"));
             startthelearning.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
 
-            apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV2"));
-            apertureascii.position = new Vector2(100+ apertureascii.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+            apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV3"));
+            apertureascii.position = new Vector2(10+ apertureascii.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
 
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
 
 
-            
+            totalAngularVelocity = 0;
 
         }
 
@@ -173,9 +176,19 @@ namespace TOJam2011Game
                         Game.Components.Add(apertureascii);
                         timeCounter = 0;
 
-                        apertureascii.velocity = new Vector2(0, 10);
+                        apertureascii.velocity = new Vector2(5,0);
                         apertureascii.friction = 0;
                         apertureascii.speed = 1;
+                        apertureascii.isUnFading = true;
+                        apertureascii.customRGBA = 20;
+                        apertureascii.colorLerp.R = (byte)apertureascii.customRGBA;
+                        apertureascii.colorLerp.G = (byte)apertureascii.customRGBA;
+                        apertureascii.colorLerp.B = (byte)apertureascii.customRGBA;
+                        apertureascii.colorLerp.A = (byte)apertureascii.customRGBA;
+
+                        apertureascii.rotation = -0.001f;     
+                        
+                        
                     }
                 }
             }
@@ -184,10 +197,13 @@ namespace TOJam2011Game
             if (apertureascii.isActive)
             {
 
-              //  if (apertureascii.IsInsideScreen(apertureascii.texture))
-               // {
-                    apertureascii.WallBounce(apertureascii.texture);
-               // }
+                if (apertureascii.IsInsideScreen(apertureascii.texture))
+                {
+                    apertureascii.isWallBouncing = true;
+                    Handle_and_CheckWeaponCollisionLightUp(apertureascii);
+                    apertureascii.rotation += totalAngularVelocity;
+                       
+                }
 
             }
 
@@ -195,7 +211,7 @@ namespace TOJam2011Game
 
         }
 
-
+        
 
 
         public override void Draw(GameTime gameTime)
@@ -234,6 +250,40 @@ namespace TOJam2011Game
             }
         }
 
+
+        public void Handle_and_CheckWeaponCollisionLightUp(GameObject gameObject)
+        {
+            if (gameObject.isAlive)
+            {
+                foreach (KeyValuePair<int, WeaponObject[]> entry in mainPlayer.weaponDict)
+                {
+                    foreach (WeaponObject w in entry.Value)
+                    {
+                        if (w.isAlive && w.isSolid)
+                        {
+                            if (gameObject.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                            {
+                                w.isAlive = false;
+
+                                gameObject.customRGBA += 5;
+                                gameObject.rotation -= 0.001f;
+                                totalAngularVelocity -= 0.001f;
+                                
+
+                                
+                                //if (gameObject.customRGBA > 254)
+                                //{
+                                //    gameObject.isAlive = false;
+                                //    gameObject.isKilled = true;
+                                //    Game.Components.Remove(gameObject);
+                                //    gameObject.Dispose();
+                                //}
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 

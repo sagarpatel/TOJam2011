@@ -84,7 +84,7 @@ namespace TOJam2011Game
             
                 // wait 2 seconds before loading next
                 timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (timeCounter > 2000)
+                if (timeCounter > 100)
                 {
                     player1.activeTextureID = 7;
                     //Put next level

@@ -45,6 +45,11 @@ namespace TOJam2011Game
         public Rectangle rect;
 
         public bool isWallBouncing;
+        public bool isUnFading;
+        public float UnFadingLerp;
+        public int customRGBA;
+
+        public Color colorLerp;
 
         public GameObject(Game game, SpriteBatch sB): base(game)
         {
@@ -52,6 +57,11 @@ namespace TOJam2011Game
             isKilled = false;
             isAlive = true;
             isSolid = true;
+            isUnFading = false;
+            UnFadingLerp = 0;
+            colorLerp = Color.White;
+            customRGBA = 0;
+
             position = new Vector2(0, 0);
             velocity = new Vector2(0, 0);
 
