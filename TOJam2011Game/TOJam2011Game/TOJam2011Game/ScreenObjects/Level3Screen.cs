@@ -76,6 +76,12 @@ namespace TOJam2011Game
 
             Handle_and_CheckWeaponCollisionFeynman(feynmanLecture);
 
+            foreach (EnemyObject e in feynmanLecture.enemies1)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
             base.Update(gameTime);
         }
 
@@ -120,6 +126,31 @@ namespace TOJam2011Game
             }
         }
 
+
+
+        public void Handle_and_CheckWeaponCollision(GameObject gameObject)
+        {
+            if (gameObject.isAlive)
+            {
+                foreach (KeyValuePair<int, WeaponObject[]> entry in mainPlayer.weaponDict)
+                {
+                    foreach (WeaponObject w in entry.Value)
+                    {
+                        if (w.isAlive && w.isSolid)
+                        {
+                            if (gameObject.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                            {
+                                w.isAlive = false;
+                                gameObject.isAlive = false;
+                                gameObject.isKilled = true;
+                                Game.Components.Remove(gameObject);
+                                gameObject.Dispose();
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 
 

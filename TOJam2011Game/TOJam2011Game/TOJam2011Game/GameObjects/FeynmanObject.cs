@@ -22,25 +22,73 @@ namespace TOJam2011Game
         public Video feynmanVid;
         public VideoPlayer videoPlayer;
 
+        public TimeSpan timeSpan;
 
+        public EnemyObject[] enemies1;
+
+        public int maxenemies;
+
+        bool isat8secSpawed;
+
+        int enemycounter;
+        
         public FeynmanObject(Game game, SpriteBatch sB):base(game,sB)
         {
 
 
             isAlive = true;
             isKilled = false;
-
+            isat8secSpawed = false;
+            enemycounter = 0;
 
             feynmanVid = Game.Content.Load<Video>("Videos/F1v3");
             videoPlayer = new VideoPlayer();
 
-            
+            timeSpan = new TimeSpan();
+
+
+            maxenemies = 7;
+
+            enemies1 = new EnemyObject[maxenemies];
+            for(int i =0;i<maxenemies;i++)
+            {
+                enemies1[i] = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Enemies/42V1"));
+                enemies1[i].isWallBouncing = true;
+                Game.Components.Add(enemies1[i]);
+            }
+
+
+
         }
 
 
         public override void Update(GameTime gameTime)
         {
             // Player Update Code Here
+            timeSpan = videoPlayer.PlayPosition;
+
+
+            if (timeSpan > TimeSpan.FromSeconds(7) && isat8secSpawed== false)
+            {
+                foreach (EnemyObject enemy in enemies1)
+                {
+                    if (enemy.isAlive == false)
+                    {
+                        enemy.isAlive = true;
+                        enemy.velocity = GenerateRandomVelocity();
+                        enemy.position = position;
+                        enemycounter++;
+                        break;
+                    }
+                }
+
+                if (enemycounter == maxenemies)
+                {
+                    isat8secSpawed = true;
+                }
+            }
+
+
 
             if (isWallBouncing)
             {
@@ -49,6 +97,9 @@ namespace TOJam2011Game
 
 
             UpdatePV();
+
+
+            
 
             base.Update(gameTime);
 
@@ -66,6 +117,23 @@ namespace TOJam2011Game
 
             base.Draw(gameTime);
         }
+
+
+        public Vector2 GenerateRandomVelocity()
+        {
+
+            float baseSpeed = 2f;
+
+            Random rand = new Random();
+
+            float x = baseSpeed * (float)Math.Cos(2 * Math.PI * rand.NextDouble());
+            float y = baseSpeed * (float)Math.Sin(2 * Math.PI * rand.NextDouble());
+
+            Vector2 vel = new Vector2(x, y);
+            return vel;
+
+        }
+
 
 
         
