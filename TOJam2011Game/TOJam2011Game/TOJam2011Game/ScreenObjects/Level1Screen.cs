@@ -36,6 +36,9 @@ namespace TOJam2011Game
 
         double timeCount;
 
+        SoundEffect wall_smack;
+        SoundEffect toilet_flush;
+
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
@@ -77,7 +80,11 @@ namespace TOJam2011Game
             mainPlayer.activeTextureID = 1;
 
             timeCount = 0;
-            
+
+            wall_smack = Game.Content.Load<SoundEffect>("SoundEffects/smack-1");
+            toilet_flush = Game.Content.Load<SoundEffect>("SoundEffects/toilet-flush-2");
+
+            toilet_flush.Play();
         }
 
 
@@ -127,11 +134,19 @@ namespace TOJam2011Game
                 if (mainPlayer.IsInsideScreen(mainPlayer.textureList[mainPlayer.activeTextureID]))
                 {
                     mainPlayer.isWallBouncing = true;
-                    mainPlayer.activeTextureID = 1;
+                    if (mainPlayer.activeTextureID == 0)
+                    {
+                        mainPlayer.activeTextureID = 1;
+                    }
 
                     if (mainPlayer.velocity.X < 1f)
                     {
+                        if (mainPlayer.activeTextureID == 1)
+                        {
+                            wall_smack.Play();
+                        }
                         mainPlayer.activeTextureID = 2;
+                        
                         
                         if (Math.Abs(mainPlayer.velocity.X) < 0.1f)
                         {

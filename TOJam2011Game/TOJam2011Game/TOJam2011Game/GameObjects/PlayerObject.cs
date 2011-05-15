@@ -42,6 +42,9 @@ namespace TOJam2011Game
         public int activeTextureID;
 
         public List<Texture2D> textureList;
+
+        SoundEffect weapon_sound1;
+        
        
 
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
@@ -97,6 +100,11 @@ namespace TOJam2011Game
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/pewpew"));
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/moveme")); //element 5
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/goodjob"));
+
+
+            //Sounds from soundjay.com and flashkit.com
+            weapon_sound1 = Game.Content.Load<SoundEffect>("SoundEffects/button-4");
+            
 
             // for player2 controls
             inputHandler = new InputHandler(game,1);
@@ -198,6 +206,10 @@ namespace TOJam2011Game
                                 w.isAlive = true;
                                 w.position = position;
                                 APressedCount += 1;
+
+                                SoundEffect.MasterVolume = 0.25f;
+                                weapon_sound1.Play();
+
                                 break;
                             }
                         }
