@@ -34,9 +34,12 @@ namespace TOJam2011Game
         public int fireRate_weapon1;
         public int fireRate_weapon2;
 
+        public bool isControllable;
+
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
-            position = new Vector2(10, 10);
+            isControllable = true;
+            //position = new Vector2(10, 10);
             speed = 2f;
             friction = 0.15f;
             maxcount_weapon1 = 100;
@@ -97,7 +100,7 @@ namespace TOJam2011Game
             texture = Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2");
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
-            position = new Vector2(200, 100);
+          //  position = new Vector2(200, 100);
 
 
                      
@@ -108,27 +111,19 @@ namespace TOJam2011Game
         public override void Update(GameTime gameTime)
         {
             // Player Update Code Here
-
-
-            //Button inputs
-
-            if (inputHandler.gamepadState.Buttons.X == ButtonState.Pressed)
+            if (isControllable)
             {
-                FireWeapon(1,gameTime);
+                Controls(gameTime);
             }
 
-            if (inputHandler.gamepadState.Buttons.A == ButtonState.Pressed)
+            if (isWallBouncing)
             {
-                FireWeapon(2,gameTime);
+                WallBounce();
             }
 
-
-
-
-            ///PV
-            velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
-            velocity.Y -= inputHandler.gamepadState.ThumbSticks.Left.Y;
             UpdatePV();
+
+ 
 
             base.Update(gameTime);
 
@@ -190,6 +185,31 @@ namespace TOJam2011Game
                 }
             }
             
+
+
+        }
+
+
+        public void Controls(GameTime gameTime)
+        {
+            //Button inputs
+
+            if (inputHandler.gamepadState.Buttons.X == ButtonState.Pressed)
+            {
+                FireWeapon(1, gameTime);
+            }
+
+            if (inputHandler.gamepadState.Buttons.A == ButtonState.Pressed)
+            {
+                FireWeapon(2, gameTime);
+            }
+
+
+
+
+            ///PV
+            velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
+            velocity.Y -= inputHandler.gamepadState.ThumbSticks.Left.Y;
 
 
         }

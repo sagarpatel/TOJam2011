@@ -26,7 +26,10 @@ namespace TOJam2011Game
         TitleObject iiiTitle;
 
         bool isintroComplete;
+        bool istutorialComplete;
+        bool isPlayerLaunched;
 
+        Rectangle screenRectangle;
 
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
@@ -34,7 +37,10 @@ namespace TOJam2011Game
             isActive = true;
             isCompleted = false;
             isintroComplete = false;
-        
+            istutorialComplete = false;
+            isPlayerLaunched = false;
+
+            screenRectangle = new Rectangle(0, 0, Game1.screenWidth,Game1.screenHeight);
                       
             // set up level content
             iTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
@@ -44,7 +50,7 @@ namespace TOJam2011Game
             iiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/ImprobableV2"));
             iiTitle.position = GenerateRandomPositionOutside();
             iiTitle.rotation = 0f;
-            iiTitle.targetPosition = new Vector2(300, 300);
+            iiTitle.targetPosition = new Vector2(300, 350);
             iiTitle.targetRotation = 20f * (float)Math.PI;
 
 
@@ -56,6 +62,8 @@ namespace TOJam2011Game
             Game.Components.Add(iTitle);
             Game.Components.Add(iiTitle);
             Game.Components.Add(iiiTitle);
+
+            GameFlowManager.player1.isControllable = false;
             
         }
 
@@ -93,12 +101,25 @@ namespace TOJam2011Game
 
             }
 
-
+            //Enter tutorial
             if (isintroComplete)
             {
+                if (isPlayerLaunched == false)
+                {
+                    GameFlowManager.player1.velocity = new Vector2(10, 0);
+                    GameFlowManager.player1.friction = 0.01f;
+                    isPlayerLaunched = true;
+                }
+
+                if (GameFlowManager.player1.IsInsideScreen())
+                {
+                    GameFlowManager.player1.isWallBouncing = true;
+                }
+          
                 HandleEnemies();
             }
             
+
             
 
             //Level Completion condition
@@ -205,9 +226,9 @@ namespace TOJam2011Game
             if (Math.Round((double)iTitle.position.X) == (double)iTitle.targetPosition.X)
             {
                 //send second message
-                iiTitle.position.X = MathHelper.Lerp(iiTitle.position.X, iiTitle.targetPosition.X, 0.095f);
-                iiTitle.position.Y = MathHelper.Lerp(iiTitle.position.Y, iiTitle.targetPosition.Y, 0.095f);
-                iiTitle.rotation = MathHelper.Lerp(iiTitle.rotation, iiTitle.targetRotation, 0.05f);
+                iiTitle.position.X = MathHelper.Lerp(iiTitle.position.X, iiTitle.targetPosition.X, 0.1f);
+                iiTitle.position.Y = MathHelper.Lerp(iiTitle.position.Y, iiTitle.targetPosition.Y, 0.1f);
+                iiTitle.rotation = MathHelper.Lerp(iiTitle.rotation, iiTitle.targetRotation, 0.085f);
                 // check is second message has arrived
                 if (Math.Round((double)iiTitle.position.X) == (double)iiTitle.targetPosition.X)
                 {

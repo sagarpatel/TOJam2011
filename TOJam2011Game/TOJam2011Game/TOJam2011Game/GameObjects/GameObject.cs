@@ -43,7 +43,7 @@ namespace TOJam2011Game
 
         public Rectangle rect;
 
-     
+        public bool isWallBouncing;
 
         public GameObject(Game game, SpriteBatch sB): base(game)
         {
@@ -57,6 +57,8 @@ namespace TOJam2011Game
             origin = new Vector2(0, 0);
 
             scale = 1.0f;
+
+            isWallBouncing = false;
 
         }
 
@@ -104,7 +106,7 @@ namespace TOJam2011Game
 
             Rectangle myRec = new Rectangle((int)position.X - texture.Width/2, (int)position.Y - texture.Height/2, texture.Width, texture.Height);
             Rectangle otherRec = new Rectangle((int)otherpos.X - W/2, (int)otherpos.Y - H/2, W, H);
-
+            
             if (myRec.Intersects(otherRec))
                 return true;
             else
@@ -121,8 +123,29 @@ namespace TOJam2011Game
 
         }
 
+        public bool IsInsideScreen()
+        {
+            Rectangle myRec = new Rectangle((int)position.X - texture.Width / 2, (int)position.Y - texture.Height / 2, texture.Width, texture.Height);
+            Rectangle screenRec = new Rectangle(0, 0, Game1.screenWidth, Game1.screenHeight);
+
+            return screenRec.Contains(myRec);
+            
+        }
 
 
+        public void WallBounce()
+        {
+            if (position.X < 5 || position.X + texture.Width/2 > Game1.screenWidth)
+            {
+                velocity.X = -velocity.X;
+            }
+
+            if (position.Y < 5 || position.Y + texture.Height/2 > Game1.screenHeight)
+            {
+                velocity.Y = -velocity.Y;
+            }
+
+        }
 
 
     }

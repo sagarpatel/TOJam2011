@@ -19,6 +19,8 @@ namespace TOJam2011Game
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public static int screenWidth;
+        public static int screenHeight;
 
         GameFlowManager gameflowManager;
         
@@ -27,8 +29,11 @@ namespace TOJam2011Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 720;
+            screenWidth = 1080;
+            screenHeight = 720;
+
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
 
         }
 
