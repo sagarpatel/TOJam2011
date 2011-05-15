@@ -51,6 +51,12 @@ namespace TOJam2011Game
 
             UpdatePV();
 
+            if (IsInsideScreen(texture) == false)
+            {
+                isAlive = false;
+            }
+            
+
             base.Update(gameTime);
 
         }
@@ -79,6 +85,8 @@ namespace TOJam2011Game
             base.UpdatePV();
         }
 
+
+        
 
 
     }

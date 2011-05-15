@@ -20,6 +20,7 @@ namespace TOJam2011Game
         public static PlayerObject player1;
         public Level1Screen level1Screen;
         public Level2Screen level2Screen;
+        public Level3Screen level3Screen;
 
         double timeCounter;
 
@@ -28,6 +29,7 @@ namespace TOJam2011Game
             player1 = new PlayerObject(game, sB);
             level1Screen = new Level1Screen(game, sB);
             level2Screen = new Level2Screen(game, sB);
+            level3Screen = new Level3Screen(game, sB);
 
             timeCounter = 0;
 
@@ -41,6 +43,7 @@ namespace TOJam2011Game
         {
             level1Screen.isActive = true;
             level2Screen.isActive = false;
+            level3Screen.isActive = false;
 
             player1.position = new Vector2(-1400, Game1.screenHeight -50);
       
@@ -82,17 +85,42 @@ namespace TOJam2011Game
                 Game.Components.Remove(level1Screen);
                 level1Screen.Dispose();
             
-                // wait 2 seconds before loading next
+                // wait . seconds before loading next
                 timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (timeCounter > 100)
+                if (timeCounter > 100 && level2Screen.isCompleted == false)
                 {
                     player1.activeTextureID = 7;
                     //Put next level
                     level2Screen.isActive = true;
                     level2Screen.isCompleted = false;
                     Game.Components.Add(level2Screen);
+
+                    timeCounter = 0;
                 }
             }
+
+
+            if (level2Screen.isCompleted && level3Screen.isActive == false)
+            {
+                level2Screen.isActive = false;
+                
+
+                timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (timeCounter > 3000)
+                {
+
+                    Game.Components.Remove(level2Screen);
+                    level2Screen.Dispose();
+
+                    level3Screen.isCompleted = false;
+                    level3Screen.isActive = true;
+                    Game.Components.Add(level3Screen);
+                }
+
+                
+                
+            }
+
 
 
             base.Update(gameTime);

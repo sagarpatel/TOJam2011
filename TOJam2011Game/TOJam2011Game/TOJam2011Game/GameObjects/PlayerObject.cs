@@ -56,8 +56,8 @@ namespace TOJam2011Game
             //position = new Vector2(10, 10);
             speed = 2f;
             friction = 0.15f;
-            maxcount_weapon1 = 100;
-            maxcount_weapon2 = 200;
+            maxcount_weapon1 = 10;
+            maxcount_weapon2 = 20;
             //Higher number, slower the rate
             fireRate_weapon1 = 300;
             fireRate_weapon2 = 100;
@@ -211,7 +211,7 @@ namespace TOJam2011Game
                                 w.position = position;
                                 APressedCount += 1;
 
-                                SoundEffect.MasterVolume = 0.25f;
+                                SoundEffect.MasterVolume = 0.002f;
                                 weapon_sound1.Play();
 
                                 break;

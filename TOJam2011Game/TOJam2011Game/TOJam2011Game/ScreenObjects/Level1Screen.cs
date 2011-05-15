@@ -84,6 +84,7 @@ namespace TOJam2011Game
             wall_smack = Game.Content.Load<SoundEffect>("SoundEffects/smack-1");
             toilet_flush = Game.Content.Load<SoundEffect>("SoundEffects/toilet-flush-2");
 
+            SoundEffect.MasterVolume = 0.08f;
             toilet_flush.Play();
         }
 

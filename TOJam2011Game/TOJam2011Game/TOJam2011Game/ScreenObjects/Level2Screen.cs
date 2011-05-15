@@ -67,7 +67,7 @@ namespace TOJam2011Game
 
 
             apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV3"));
-            apertureascii.position = new Vector2(10+ apertureascii.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+            apertureascii.position = new Vector2(10+ apertureascii.texture.Width / 2, 50 + lvl2warning1.texture.Height / 2);
 
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
@@ -245,6 +245,11 @@ namespace TOJam2011Game
 
             }
 
+            if (apertureascii.isKilled)
+            {
+                isCompleted = true;
+
+            }
 
 
             PE1.UpdateParticles(PE1.ParticleArray, gameTime, (mainPlayer.position ));

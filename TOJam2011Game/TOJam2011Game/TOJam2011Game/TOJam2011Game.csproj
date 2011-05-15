@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="GameFlowManager.cs" />
     <Compile Include="GameObjects\EnemyObject.cs" />
+    <Compile Include="GameObjects\FeynmanObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\PlayerObject.cs" />
     <Compile Include="GameObjects\TitleObject.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="ScreenObjects\Level1Screen.cs" />
     <Compile Include="ScreenObjects\Level2Screen.cs" />
+    <Compile Include="ScreenObjects\Level3Screen.cs" />
     <Compile Include="ScreenObjects\ScreenObject.cs" />
   </ItemGroup>
   <ItemGroup>
