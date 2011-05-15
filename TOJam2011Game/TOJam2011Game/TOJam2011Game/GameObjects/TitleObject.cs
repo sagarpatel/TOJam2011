@@ -20,7 +20,7 @@ namespace TOJam2011Game
 
         public Vector2 targetPosition;
         public float targetRotation;
-        public bool isKilled;
+        
         public bool isShaky;
         public float initialShake;
 

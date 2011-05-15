@@ -175,7 +175,7 @@ namespace TOJam2011Game
                 mainPlayer.activeTextureID = 5;
                 mainPlayer.isMoveable = true;
 
-                if (mainPlayer.velocity.Length() > 5f)
+                if (mainPlayer.velocity.Length() > 5.4f)
                 {
                     mainPlayer.activeTextureID = 6;
                     istutorialComplete = true;

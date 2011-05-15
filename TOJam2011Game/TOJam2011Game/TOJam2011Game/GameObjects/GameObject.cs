@@ -27,6 +27,7 @@ namespace TOJam2011Game
 
         public bool isAlive;
         public bool isSolid;
+        public bool isKilled;
 
         public int HP;
 
@@ -48,7 +49,7 @@ namespace TOJam2011Game
         public GameObject(Game game, SpriteBatch sB): base(game)
         {
             spriteBatch = sB;
-
+            isKilled = false;
             isAlive = true;
             isSolid = true;
             position = new Vector2(0, 0);

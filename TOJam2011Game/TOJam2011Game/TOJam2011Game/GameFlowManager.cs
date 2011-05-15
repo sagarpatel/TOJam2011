@@ -21,13 +21,15 @@ namespace TOJam2011Game
         public Level1Screen level1Screen;
         public Level2Screen level2Screen;
 
-
+        double timeCounter;
 
         public GameFlowManager(Game game, SpriteBatch sB):base(game)
         {
             player1 = new PlayerObject(game, sB);
             level1Screen = new Level1Screen(game, sB);
             level2Screen = new Level2Screen(game, sB);
+
+            timeCounter = 0;
 
         }
 
@@ -79,12 +81,17 @@ namespace TOJam2011Game
                 level1Screen.isActive = false;
                 Game.Components.Remove(level1Screen);
                 level1Screen.Dispose();
-          
-                //Put next level
-                level2Screen.isActive = true;
-                level2Screen.isCompleted = false;
-                Game.Components.Add(level2Screen);
+            
+                // wait 2 seconds before loading next
+                timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (timeCounter > 2000)
+                {
 
+                    //Put next level
+                    level2Screen.isActive = true;
+                    level2Screen.isCompleted = false;
+                    Game.Components.Add(level2Screen);
+                }
             }
 
 
