@@ -22,11 +22,13 @@ namespace TOJam2011Game
         public float targetRotation;
         
         public bool isShaky;
+        public bool isActive;
         public float initialShake;
 
         public TitleObject(Game game,SpriteBatch sB,Texture2D passedTexture):base(game,sB)
         {
             isKilled = false;
+            isActive = false;
             texture = passedTexture;
             initialShake = 0f;
         }

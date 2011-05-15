@@ -23,17 +23,24 @@ namespace TOJam2011Game
         SpriteFont spriteFont1;
 
         TitleObject canyouseemeTitle;
+        TitleObject IPreadytolearnTitle;
 
+        double timeCounter;
 
         public Level2Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             isActive = true;
             isCompleted = false;
+            timeCounter = 0;
 
             mainPlayer = GameFlowManager.player1;
 
             canyouseemeTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/canyouseemeV1"));
             canyouseemeTitle.position = new Vector2(400, 100);
+
+            IPreadytolearnTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/IPreadytolearn"));
+            IPreadytolearnTitle.position = new Vector2(600, 300);
+
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
 
@@ -47,6 +54,7 @@ namespace TOJam2011Game
 
         protected override void LoadContent()
         {
+            canyouseemeTitle.isActive = true;
             Game.Components.Add(canyouseemeTitle);
             //base.LoadContent();
         }
@@ -59,6 +67,22 @@ namespace TOJam2011Game
 
 
             Handle_and_CheckWeaponCollision(canyouseemeTitle);
+
+            if (canyouseemeTitle.isKilled)
+            {
+                //continue to next message
+                mainPlayer.activeTextureID = 8;
+                timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+                //enter only once
+                if (timeCounter > 2000 && IPreadytolearnTitle.isActive == false)
+                {
+                    //add next message
+                    IPreadytolearnTitle.isActive = true;
+                    Game.Components.Add(IPreadytolearnTitle);
+                    
+                }
+
+            }
 
 
             base.Update(gameTime);

@@ -93,14 +93,15 @@ namespace TOJam2011Game
             weaponDict.Add(2, weapon2);
 
             textureList = new List<Texture2D>();
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2")); //element 0
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/heyouV1"));
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ouch"));
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/hit_a"));
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/pewpew"));
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/moveme")); //element 5
-            textureList.Add(Game.Content.Load<Texture2D>("Sprites/goodjob"));
-
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/ChromiumLogoV2")); //element 0
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/heyouV1"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/ouch"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/hit_a"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/pewpew"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/moveme")); //element 5
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/goodjob"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/nextlvl")); //element 7
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/smileyfaceV1"));
 
             //Sounds from soundjay.com and flashkit.com
             weapon_sound1 = Game.Content.Load<SoundEffect>("SoundEffects/button-4");

@@ -112,49 +112,49 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\ChromiumLogoV2.png">
+    <Compile Include="Sprites\Player\ChromiumLogoV2.png">
       <Name>ChromiumLogoV2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\heyouV1.png">
+    <Compile Include="Sprites\Player\heyouV1.png">
       <Name>heyouV1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\hit_a.png">
+    <Compile Include="Sprites\Player\hit_a.png">
       <Name>hit_a</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\ouch.png">
+    <Compile Include="Sprites\Player\ouch.png">
       <Name>ouch</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\pewpew.png">
+    <Compile Include="Sprites\Player\pewpew.png">
       <Name>pewpew</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\moveme.png">
+    <Compile Include="Sprites\Player\moveme.png">
       <Name>moveme</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\goodjob.png">
+    <Compile Include="Sprites\Player\goodjob.png">
       <Name>goodjob</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -184,6 +184,27 @@
   <ItemGroup>
     <Compile Include="Sprites\Level2\canyouseemeV1.png">
       <Name>canyouseemeV1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Player\nextlvl.png">
+      <Name>nextlvl</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Player\smileyfaceV1.png">
+      <Name>smileyfaceV1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Level2\IPreadytolearn.png">
+      <Name>IPreadytolearn</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

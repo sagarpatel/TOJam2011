@@ -86,7 +86,7 @@ namespace TOJam2011Game
                 timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (timeCounter > 2000)
                 {
-
+                    player1.activeTextureID = 7;
                     //Put next level
                     level2Screen.isActive = true;
                     level2Screen.isCompleted = false;
