@@ -21,6 +21,7 @@ namespace TOJam2011Game
         public bool isActive;
         public bool isLoaded;
         public bool isCompleted;
+        
 
         protected SpriteBatch spriteBatch;
 
@@ -66,6 +67,7 @@ namespace TOJam2011Game
 
         public override void Draw(GameTime gameTime)
         {
+            
             base.Draw(gameTime);
 
         }

@@ -21,11 +21,14 @@ namespace TOJam2011Game
         public Vector2 targetPosition;
         public float targetRotation;
         public bool isKilled;
+        public bool isShaky;
+        public float initialShake;
 
         public TitleObject(Game game,SpriteBatch sB,Texture2D passedTexture):base(game,sB)
         {
             isKilled = false;
             texture = passedTexture;
+            initialShake = 0f;
         }
 
 
@@ -53,8 +56,21 @@ namespace TOJam2011Game
         public override void Draw(GameTime gameTime)
         {
 
-            // spriteBatch.Draw(texture, position, Color.White);
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+            if (isShaky)
+            {
+                Random rand = new Random();
+                Vector2 tempPosition = new Vector2(0, 0);
+                tempPosition.X = position.X + (float)rand.Next(-1, 1) * position.X * initialShake*0.01f;
+                tempPosition.Y = position.Y + (float)rand.Next(-1, 1) * position.Y * initialShake*0.01f;
+                spriteBatch.Draw(texture,tempPosition, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+            }
+
+
+            else
+            {
+                spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+            }
+
 
             base.Draw(gameTime);
         }

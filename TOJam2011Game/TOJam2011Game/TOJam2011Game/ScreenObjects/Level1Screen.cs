@@ -51,6 +51,7 @@ namespace TOJam2011Game
             iiiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/IncertitudeV1"));
             iiiTitle.targetPosition = new Vector2(600, 500);
             iiiTitle.position = -iiiTitle.targetPosition;
+            iiiTitle.initialShake = 1f;
 
             Game.Components.Add(iTitle);
             Game.Components.Add(iiTitle);
@@ -101,7 +102,7 @@ namespace TOJam2011Game
             
 
             //Level Completion condition
-            if (iTitle.isKilled)
+            if (iTitle.isKilled && iiTitle.isKilled && iiiTitle.isKilled)
             {
                 isCompleted = true;
             }
@@ -134,21 +135,59 @@ namespace TOJam2011Game
                 {
                     if (w.isAlive && w.isSolid)
                     {
-                        if (iTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                        //for title1
+                        if (iTitle.isAlive)
                         {
-                            w.isAlive = false;
-                            iTitle.isAlive = false;
-                            iTitle.isKilled = true;
+                            if (iTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                            {
+                                w.isAlive = false;
+                                iTitle.isAlive = false;
+                                iTitle.isKilled = true;
+                            }
+                        }
+                        //for title2
+                        if (iiTitle.isAlive)
+                        {
+                            if (iiTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                            {
+                                w.isAlive = false;
+                                iiTitle.isAlive = false;
+                                iiTitle.isKilled = true;
+                            }
+                        }
+                        //for title3
+                        if (iiiTitle.isAlive)
+                        {
+                            if (iiiTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
+                            {
+                                w.isAlive = false;
+                                iiiTitle.isAlive = false;
+                                iiiTitle.isKilled = true;
+                            }
                         }
                     }
                 }
             }
 
+            //for title1
             if (iTitle.isKilled == true && iTitle.isAlive == false)
             {
                 Game.Components.Remove(iTitle);
                 iTitle.Dispose();
             }
+            //for title2
+            if (iiTitle.isKilled == true && iiTitle.isAlive == false)
+            {
+                Game.Components.Remove(iiTitle);
+                iiTitle.Dispose();
+            }
+            //for title3
+            if (iiiTitle.isKilled == true && iiiTitle.isAlive == false)
+            {
+                Game.Components.Remove(iiiTitle);
+                iiiTitle.Dispose();
+            }
+
 
 
         }
@@ -173,11 +212,16 @@ namespace TOJam2011Game
                 if (Math.Round((double)iiTitle.position.X) == (double)iiTitle.targetPosition.X)
                 {
                     //send third message
-                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.05f);
-                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.05f);
+                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.02f);
+                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.02f);
+                    //Shaky feel code
+                    iiiTitle.isShaky = true;
+                    iiiTitle.initialShake = MathHelper.Lerp(iiTitle.initialShake, 100f, 0.1f);
+                  
                     //check if third message has arrived
                     if (Math.Round((double)iiiTitle.position.X) == (double)iiiTitle.targetPosition.X)
                     {
+                        iiiTitle.isShaky = false;
                         return true;
                     }
                 }
