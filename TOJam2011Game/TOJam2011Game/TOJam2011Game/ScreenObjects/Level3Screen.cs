@@ -29,6 +29,9 @@ namespace TOJam2011Game
 
         FeynmanObject feynmanLecture;
 
+        float gravity;
+        float bulletPush;
+
         public Level3Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             isActive = true;
@@ -44,8 +47,9 @@ namespace TOJam2011Game
 
             feynmanLecture = new FeynmanObject(game, sB);
             feynmanLecture.position = new Vector2(400, 150);
-            
 
+            gravity = 1f;
+            bulletPush = 10f;
             
         }
 
@@ -62,6 +66,19 @@ namespace TOJam2011Game
             
             base.Initialize();
         }
+
+
+
+        public override void Update(GameTime gameTime)
+        {
+
+            feynmanLecture.position.Y += gravity;
+
+            Handle_and_CheckWeaponCollisionFeynman(feynmanLecture);
+
+            base.Update(gameTime);
+        }
+
 
 
         public override void Draw(GameTime gameTime)
@@ -81,7 +98,7 @@ namespace TOJam2011Game
 
 
 
-        public void Handle_and_CheckWeaponCollision(GameObject gameObject)
+        public void Handle_and_CheckWeaponCollisionFeynman(GameObject gameObject)
         {
             if (gameObject.isAlive)
             {
@@ -94,10 +111,8 @@ namespace TOJam2011Game
                             if (gameObject.CheckCollision(w.position, w.texture.Width, w.texture.Height))
                             {
                                 w.isAlive = false;
-                                gameObject.isAlive = false;
-                                gameObject.isKilled = true;
-                                Game.Components.Remove(gameObject);
-                                gameObject.Dispose();
+                                gameObject.position.Y -= bulletPush;
+                               
                             }
                         }
                     }
