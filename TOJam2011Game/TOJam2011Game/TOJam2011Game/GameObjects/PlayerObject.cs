@@ -70,7 +70,7 @@ namespace TOJam2011Game
             weapon1 = new WeaponObject[maxcount_weapon1];
             for (int i = 0; i < maxcount_weapon1; i++)
             {
-                weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLshotV1"));
+                weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Player/mainWeaponV1"));
                 weapon1[i].velocity = velocity_weapon1;
                 weapon1[i].fireRate = fireRate_weapon1;
                 Game.Components.Add(weapon1[i]);
@@ -80,7 +80,7 @@ namespace TOJam2011Game
             weapon2 = new WeaponObject[maxcount_weapon2];
             for (int i = 0; i < maxcount_weapon2; i++)
             {
-                weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLshotV1"));
+                weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Player/mainWeaponV1"));
                 weapon2[i].velocity = velocity_weapon2;
                 weapon2[i].fireRate = fireRate_weapon2;
                 Game.Components.Add(weapon2[i]);
@@ -102,6 +102,9 @@ namespace TOJam2011Game
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/goodjob"));
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/nextlvl")); //element 7
             textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/smileyfaceV1"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/shiftyface"));//element9
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/OOOface"));//element10
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/Player/polegoatFace"));//element11
 
             //Sounds from soundjay.com and flashkit.com
             weapon_sound1 = Game.Content.Load<SoundEffect>("SoundEffects/button-4");

@@ -26,13 +26,16 @@ namespace TOJam2011Game
         TitleObject IPreadytolearnTitle;
         TitleObject lvl2warning1;
         TitleObject keepafloat;
-        TitleObject startthelearning;
+        TitleObject letsstartthelearning;
+        TitleObject forscience;
         TitleObject apertureascii;
 
 
         double timeCounter;
 
         float totalAngularVelocity;
+
+        ParticleEngine PE1;
 
 
         public Level2Screen(Game game, SpriteBatch sB): base(game, sB)
@@ -55,8 +58,13 @@ namespace TOJam2011Game
             keepafloat = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/keepafloat"));
             keepafloat.position = new Vector2(300 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
 
-            startthelearning = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/startthelearning"));
-            startthelearning.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+            letsstartthelearning = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/letsstartthelearning"));
+            letsstartthelearning.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+
+
+            forscience = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/forscience"));
+            forscience.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+
 
             apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV3"));
             apertureascii.position = new Vector2(10+ apertureascii.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
@@ -66,6 +74,8 @@ namespace TOJam2011Game
 
 
             totalAngularVelocity = 0;
+
+            PE1 = new ParticleEngine(sB, Game.Content.Load<Texture2D>("Sprites/goatV1"),2);
 
         }
 
@@ -143,7 +153,7 @@ namespace TOJam2011Game
 
 
 
-            if (keepafloat.isActive && startthelearning.isActive == false)
+            if (keepafloat.isActive && letsstartthelearning.isActive == false)
             {
                 Handle_and_CheckWeaponCollision(keepafloat);
 
@@ -153,8 +163,8 @@ namespace TOJam2011Game
 
                     if (timeCounter > 2000)
                     {
-                        startthelearning.isActive = true;
-                        Game.Components.Add(startthelearning);
+                        letsstartthelearning.isActive = true;
+                        Game.Components.Add(letsstartthelearning);
                         timeCounter = 0;
                     }
                 }
@@ -162,11 +172,30 @@ namespace TOJam2011Game
 
 
 
-            if (startthelearning.isActive && apertureascii.isActive == false)
+            if (letsstartthelearning.isActive && forscience.isActive == false)
             {
-                Handle_and_CheckWeaponCollision(startthelearning);
+                Handle_and_CheckWeaponCollision(letsstartthelearning);
 
-                if (startthelearning.isKilled)
+                if (letsstartthelearning.isKilled)
+                {
+                    timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (timeCounter > 1000)
+                    {
+                        forscience.isActive = true;
+                        Game.Components.Add(forscience);
+                        timeCounter = 0;
+                    }
+                }
+            }
+
+
+
+            if (forscience.isActive && apertureascii.isActive == false)
+            {
+                Handle_and_CheckWeaponCollision(forscience);
+
+                if (forscience.isKilled)
                 {
                     timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -194,18 +223,31 @@ namespace TOJam2011Game
             }
 
 
-            if (apertureascii.isActive)
+            if (apertureascii.isActive && apertureascii.isKilled == false)
             {
 
                 if (apertureascii.IsInsideScreen(apertureascii.texture))
                 {
-                    apertureascii.isWallBouncing = true;
-                    Handle_and_CheckWeaponCollisionLightUp(apertureascii);
+
+                    
+                    apertureascii.isWallBouncing = true;             
                     apertureascii.rotation += totalAngularVelocity;
-                       
+                    mainPlayer.activeTextureID = 9;
+
+                    if (apertureascii.customRGBA > 200)
+                    {
+                        mainPlayer.activeTextureID = 10;
+                    }
+
+                    Handle_and_CheckWeaponCollisionLightUp(apertureascii, gameTime);
+         
                 }
 
             }
+
+
+
+            PE1.UpdateParticles(PE1.ParticleArray, gameTime, (mainPlayer.position ));
 
             base.Update(gameTime);
 
@@ -220,6 +262,8 @@ namespace TOJam2011Game
             //  spriteBatch.Draw stuff here
 
             spriteBatch.DrawString(spriteFont1, "test2", new Vector2(400, 0), Color.Green);
+
+            PE1.DrawExplosion(PE1.ParticleArray, spriteBatch, gameTime);
 
 
             base.Draw(gameTime);
@@ -251,7 +295,7 @@ namespace TOJam2011Game
         }
 
 
-        public void Handle_and_CheckWeaponCollisionLightUp(GameObject gameObject)
+        public void Handle_and_CheckWeaponCollisionLightUp(GameObject gameObject,GameTime gameTime)
         {
             if (gameObject.isAlive)
             {
@@ -265,19 +309,20 @@ namespace TOJam2011Game
                             {
                                 w.isAlive = false;
 
-                                gameObject.customRGBA += 5;
-                                gameObject.rotation -= 0.001f;
-                                totalAngularVelocity -= 0.001f;
-                                
+                                gameObject.customRGBA += 3;
+                                gameObject.rotation -= 0.003f;
+                                totalAngularVelocity -= 0.003f;
 
                                 
-                                //if (gameObject.customRGBA > 254)
-                                //{
-                                //    gameObject.isAlive = false;
-                                //    gameObject.isKilled = true;
-                                //    Game.Components.Remove(gameObject);
-                                //    gameObject.Dispose();
-                                //}
+                                if (gameObject.customRGBA > 254)
+                                {
+                                    PE1.AddExplosion(PE1.ParticleArray, PE1.MaxParticles, gameObject.position, PE1.ExplosionSize, gameTime, w.velocity);
+                                    mainPlayer.activeTextureID = 11;
+                                    gameObject.isAlive = false;
+                                    gameObject.isKilled = true;
+                                    Game.Components.Remove(gameObject);
+                                    gameObject.Dispose();
+                                }
                             }
                         }
                     }
