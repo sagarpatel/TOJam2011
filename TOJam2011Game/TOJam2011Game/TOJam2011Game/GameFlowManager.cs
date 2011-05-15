@@ -42,7 +42,7 @@ namespace TOJam2011Game
             level1Screen.isActive = true;
             level2Screen.isActive = false;
 
-            player1.position = new Vector2(-1400, 650);
+            player1.position = new Vector2(-1400, Game1.screenHeight -50);
       
 
             Game.Components.Add(player1);

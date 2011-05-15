@@ -47,7 +47,7 @@ namespace TOJam2011Game
         {
             // Player Update Code Here
 
-
+            UpdatePV();
             base.Update(gameTime);
 
         }
@@ -78,6 +78,13 @@ namespace TOJam2011Game
         }
 
 
+        protected override void UpdatePV()
+        {
+            velocity = velocity * (1f - friction);
+            position += speed * velocity;
+
+            base.UpdatePV();
+        }
 
 
 

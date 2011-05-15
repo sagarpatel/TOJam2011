@@ -136,12 +136,12 @@ namespace TOJam2011Game
 
         public void WallBounce(Texture2D tex)
         {
-            if (position.X < 5 || position.X + tex.Width / 2 > Game1.screenWidth)
+            if (position.X - tex.Width/2 < 5 || position.X + tex.Width / 2 > Game1.screenWidth)
             {
                 velocity.X = -velocity.X;
             }
 
-            if (position.Y < 5 || position.Y + tex.Height / 2 > Game1.screenHeight)
+            if (position.Y - tex.Height/2 < 5 || position.Y + tex.Height / 2 > Game1.screenHeight)
             {
                 velocity.Y = -velocity.Y;
             }

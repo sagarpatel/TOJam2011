@@ -24,6 +24,11 @@ namespace TOJam2011Game
 
         TitleObject canyouseemeTitle;
         TitleObject IPreadytolearnTitle;
+        TitleObject lvl2warning1;
+        TitleObject keepafloat;
+        TitleObject startthelearning;
+        TitleObject apertureascii;
+
 
         double timeCounter;
 
@@ -40,6 +45,18 @@ namespace TOJam2011Game
 
             IPreadytolearnTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/IPreadytolearn"));
             IPreadytolearnTitle.position = new Vector2(600, 300);
+
+            lvl2warning1 = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/lv2warning1"));
+            lvl2warning1.position = new Vector2(100 + lvl2warning1.texture.Width/2, 100 + lvl2warning1.texture.Height/2);
+
+            keepafloat = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/keepafloat"));
+            keepafloat.position = new Vector2(300 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+
+            startthelearning = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/startthelearning"));
+            startthelearning.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+
+            apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV2"));
+            apertureascii.position = new Vector2(100+ apertureascii.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
 
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
@@ -68,7 +85,7 @@ namespace TOJam2011Game
 
             Handle_and_CheckWeaponCollision(canyouseemeTitle);
 
-            if (canyouseemeTitle.isKilled)
+            if (canyouseemeTitle.isKilled && IPreadytolearnTitle.isActive == false)
             {
                 //continue to next message
                 mainPlayer.activeTextureID = 8;
@@ -79,11 +96,100 @@ namespace TOJam2011Game
                     //add next message
                     IPreadytolearnTitle.isActive = true;
                     Game.Components.Add(IPreadytolearnTitle);
-                    
+                    timeCounter = 0;
                 }
 
             }
 
+
+            if (IPreadytolearnTitle.isActive && lvl2warning1.isActive == false)
+            {
+                Handle_and_CheckWeaponCollision(IPreadytolearnTitle);
+
+                if (IPreadytolearnTitle.isKilled)
+                {
+                    timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (timeCounter > 2000)
+                    {
+                        lvl2warning1.isActive = true;
+                        Game.Components.Add(lvl2warning1);
+                        timeCounter = 0;
+                    }
+                }
+            }
+
+
+
+            if (lvl2warning1.isActive && keepafloat.isActive == false)
+            {
+                Handle_and_CheckWeaponCollision(lvl2warning1);
+
+                if (lvl2warning1.isKilled)
+                {
+                    timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (timeCounter > 2000)
+                    {
+                        keepafloat.isActive = true;
+                        Game.Components.Add(keepafloat);
+                        timeCounter = 0;
+                    }
+                }
+            }
+
+
+
+            if (keepafloat.isActive && startthelearning.isActive == false)
+            {
+                Handle_and_CheckWeaponCollision(keepafloat);
+
+                if (keepafloat.isKilled)
+                {
+                    timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (timeCounter > 2000)
+                    {
+                        startthelearning.isActive = true;
+                        Game.Components.Add(startthelearning);
+                        timeCounter = 0;
+                    }
+                }
+            }
+
+
+
+            if (startthelearning.isActive && apertureascii.isActive == false)
+            {
+                Handle_and_CheckWeaponCollision(startthelearning);
+
+                if (startthelearning.isKilled)
+                {
+                    timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                    if (timeCounter > 1000)
+                    {
+                        apertureascii.isActive = true;
+                        Game.Components.Add(apertureascii);
+                        timeCounter = 0;
+
+                        apertureascii.velocity = new Vector2(0, 10);
+                        apertureascii.friction = 0;
+                        apertureascii.speed = 1;
+                    }
+                }
+            }
+
+
+            if (apertureascii.isActive)
+            {
+
+              //  if (apertureascii.IsInsideScreen(apertureascii.texture))
+               // {
+                    apertureascii.WallBounce(apertureascii.texture);
+               // }
+
+            }
 
             base.Update(gameTime);
 
