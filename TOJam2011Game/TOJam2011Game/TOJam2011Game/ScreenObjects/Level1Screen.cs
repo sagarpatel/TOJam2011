@@ -31,6 +31,8 @@ namespace TOJam2011Game
 
         Rectangle screenRectangle;
 
+        PlayerObject mainPlayer;
+
         public Level1Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
@@ -63,7 +65,12 @@ namespace TOJam2011Game
             Game.Components.Add(iiTitle);
             Game.Components.Add(iiiTitle);
 
-            GameFlowManager.player1.isControllable = false;
+            mainPlayer = GameFlowManager.player1;
+
+            mainPlayer.isControllable = false;
+            mainPlayer.activeTextureID = 1;
+
+            
             
         }
 
@@ -106,14 +113,28 @@ namespace TOJam2011Game
             {
                 if (isPlayerLaunched == false)
                 {
-                    GameFlowManager.player1.velocity = new Vector2(10, 0);
-                    GameFlowManager.player1.friction = 0.01f;
+                    mainPlayer.velocity = new Vector2(10, 0);
+                    mainPlayer.friction = 0.01f;
                     isPlayerLaunched = true;
                 }
 
-                if (GameFlowManager.player1.IsInsideScreen())
+                if (mainPlayer.IsInsideScreen(mainPlayer.textureList[mainPlayer.activeTextureID]))
                 {
-                    GameFlowManager.player1.isWallBouncing = true;
+                    mainPlayer.isWallBouncing = true;
+                    mainPlayer.activeTextureID = 1;
+
+                    if (mainPlayer.velocity.X < 1f)
+                    {
+                        mainPlayer.activeTextureID = 2;
+                        
+                        if (Math.Abs(mainPlayer.velocity.X) < 0.1f)
+                        {
+                            mainPlayer.activeTextureID = 3;
+                            mainPlayer.isControllable = true;
+                            mainPlayer.friction = 0.15f;
+                        }
+                    }
+
                 }
           
                 HandleEnemies();
@@ -150,7 +171,7 @@ namespace TOJam2011Game
         {
             // Collision with weapons check
 
-            foreach (KeyValuePair<int, WeaponObject[]> entry in GameFlowManager.player1.weaponDict)
+            foreach (KeyValuePair<int, WeaponObject[]> entry in mainPlayer.weaponDict)
             {
                 foreach (WeaponObject w in entry.Value)
                 {

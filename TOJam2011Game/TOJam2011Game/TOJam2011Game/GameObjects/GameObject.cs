@@ -123,9 +123,9 @@ namespace TOJam2011Game
 
         }
 
-        public bool IsInsideScreen()
+        public bool IsInsideScreen(Texture2D tex)
         {
-            Rectangle myRec = new Rectangle((int)position.X - texture.Width / 2, (int)position.Y - texture.Height / 2, texture.Width, texture.Height);
+            Rectangle myRec = new Rectangle((int)position.X - tex.Width / 2, (int)position.Y - tex.Height / 2, tex.Width, tex.Height);
             Rectangle screenRec = new Rectangle(0, 0, Game1.screenWidth, Game1.screenHeight);
 
             return screenRec.Contains(myRec);
@@ -133,14 +133,14 @@ namespace TOJam2011Game
         }
 
 
-        public void WallBounce()
+        public void WallBounce(Texture2D tex)
         {
-            if (position.X < 5 || position.X + texture.Width/2 > Game1.screenWidth)
+            if (position.X < 5 || position.X + tex.Width / 2 > Game1.screenWidth)
             {
                 velocity.X = -velocity.X;
             }
 
-            if (position.Y < 5 || position.Y + texture.Height/2 > Game1.screenHeight)
+            if (position.Y < 5 || position.Y + tex.Height / 2 > Game1.screenHeight)
             {
                 velocity.Y = -velocity.Y;
             }

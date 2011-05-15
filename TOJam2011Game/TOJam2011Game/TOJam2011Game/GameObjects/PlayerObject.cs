@@ -36,6 +36,11 @@ namespace TOJam2011Game
 
         public bool isControllable;
 
+        public int activeTextureID;
+
+        public List<Texture2D> textureList;
+       
+
         public PlayerObject(Game game, SpriteBatch sB): base(game, sB)
         {
             isControllable = true;
@@ -50,6 +55,8 @@ namespace TOJam2011Game
 
             velocity_weapon1 = new Vector2(0,-10);
             velocity_weapon2 = new Vector2(0,-20);
+
+            activeTextureID = 0;
 
             weapon1 = new WeaponObject[maxcount_weapon1];
             for (int i = 0; i < maxcount_weapon1; i++)
@@ -76,7 +83,11 @@ namespace TOJam2011Game
             weaponDict.Add(1, weapon1);
             weaponDict.Add(2, weapon2);
 
-            
+            textureList = new List<Texture2D>();
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/heyouV1"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/ouch"));
+            textureList.Add(Game.Content.Load<Texture2D>("Sprites/hit_a"));
 
             // for player2 controls
             inputHandler = new InputHandler(game,1);
@@ -97,8 +108,8 @@ namespace TOJam2011Game
         {
 
 
-            texture = Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2");
-            origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+            //texture = Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2");
+            //origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
           //  position = new Vector2(200, 100);
 
@@ -118,7 +129,7 @@ namespace TOJam2011Game
 
             if (isWallBouncing)
             {
-                WallBounce();
+                WallBounce(textureList[activeTextureID]);
             }
 
             UpdatePV();
@@ -127,8 +138,6 @@ namespace TOJam2011Game
 
             base.Update(gameTime);
 
-            
-
         }
 
 
@@ -136,8 +145,9 @@ namespace TOJam2011Game
 
         public override void Draw(GameTime gameTime)
         {
+            Texture2D textureToDraw = textureList[activeTextureID];
 
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(textureToDraw, position, null, Color.White, rotation, new Vector2(textureToDraw.Width / 2, textureToDraw.Height / 2), scale, SpriteEffects.None, 0);
 
 
 
