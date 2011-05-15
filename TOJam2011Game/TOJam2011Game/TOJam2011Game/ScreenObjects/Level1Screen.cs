@@ -212,8 +212,8 @@ namespace TOJam2011Game
                 if (Math.Round((double)iiTitle.position.X) == (double)iiTitle.targetPosition.X)
                 {
                     //send third message
-                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.02f);
-                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.02f);
+                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.03f);
+                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.03f);
                     //Shaky feel code
                     iiiTitle.isShaky = true;
                     iiiTitle.initialShake = MathHelper.Lerp(iiTitle.initialShake, 100f, 0.1f);

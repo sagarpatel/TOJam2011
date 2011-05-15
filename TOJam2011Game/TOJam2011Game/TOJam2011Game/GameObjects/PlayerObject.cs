@@ -94,7 +94,7 @@ namespace TOJam2011Game
         {
 
 
-            texture = Game.Content.Load<Texture2D>("Sprites/GCLV4");
+            texture = Game.Content.Load<Texture2D>("Sprites/ChromiumLogoV2");
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
             position = new Vector2(200, 100);
