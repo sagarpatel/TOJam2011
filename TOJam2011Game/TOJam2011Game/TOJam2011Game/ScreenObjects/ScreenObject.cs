@@ -76,7 +76,7 @@ namespace TOJam2011Game
         {
             //radius of 1337
 
-            float radius = 1337;
+            float radius = 3*1337;
 
             Random rand = new Random();
             

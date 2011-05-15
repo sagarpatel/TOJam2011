@@ -15,15 +15,17 @@ namespace TOJam2011Game
 {
 
 
-    public class EnemyObject: GameObject
+    public class TitleObject : GameObject
     {
+
+        public Vector2 targetPosition;
+        public float targetRotation;
         public bool isKilled;
 
-        public EnemyObject(Game game, SpriteBatch sB, Texture2D passedTexture): base(game, sB)
+        public TitleObject(Game game,SpriteBatch sB,Texture2D passedTexture):base(game,sB)
         {
-            texture = passedTexture;
-            isAlive = true;
             isKilled = false;
+            texture = passedTexture;
         }
 
 
@@ -40,7 +42,7 @@ namespace TOJam2011Game
         {
             // Player Update Code Here
 
-            
+
             base.Update(gameTime);
 
         }
@@ -51,7 +53,7 @@ namespace TOJam2011Game
         public override void Draw(GameTime gameTime)
         {
 
-           // spriteBatch.Draw(texture, position, Color.White);
+            // spriteBatch.Draw(texture, position, Color.White);
             spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
 
             base.Draw(gameTime);
@@ -61,11 +63,17 @@ namespace TOJam2011Game
 
 
 
+
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
 
 
 

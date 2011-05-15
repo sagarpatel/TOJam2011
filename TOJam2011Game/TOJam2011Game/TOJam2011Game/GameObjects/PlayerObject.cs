@@ -54,7 +54,7 @@ namespace TOJam2011Game
                 weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
                 weapon1[i].velocity = velocity_weapon1;
                 weapon1[i].fireRate = fireRate_weapon1;
-             //   Game.Components.Add(weapon1[i]);
+                Game.Components.Add(weapon1[i]);
             }
 
 
@@ -64,7 +64,7 @@ namespace TOJam2011Game
                 weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
                 weapon2[i].velocity = velocity_weapon2;
                 weapon2[i].fireRate = fireRate_weapon2;
-              //  Game.Components.Add(weapon2[i]);
+                Game.Components.Add(weapon2[i]);
                 
             }
 
@@ -84,21 +84,7 @@ namespace TOJam2011Game
 
         public override void Initialize()
         {
-
-            for (int i = 0; i < maxcount_weapon1; i++)
-            {   
-                Game.Components.Add(weapon1[i]);
-            }
-
-            
-          
-            for (int i = 0; i < maxcount_weapon2; i++)
-            {
-                Game.Components.Add(weapon2[i]);
-                weapon2[i].position = new Vector2(20, 200);
-            }
-
-
+       
             base.Initialize();
         }
 
@@ -156,7 +142,8 @@ namespace TOJam2011Game
         public override void Draw(GameTime gameTime)
         {
 
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+
 
 
             base.Draw(gameTime);

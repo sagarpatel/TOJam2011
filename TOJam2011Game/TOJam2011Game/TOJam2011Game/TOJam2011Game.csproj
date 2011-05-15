@@ -111,6 +111,7 @@
     <Compile Include="GameObjects\EnemyObject.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\PlayerObject.cs" />
+    <Compile Include="GameObjects\TitleObject.cs" />
     <Compile Include="GameObjects\WeaponObject.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

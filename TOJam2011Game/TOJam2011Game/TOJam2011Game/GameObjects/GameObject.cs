@@ -56,6 +56,8 @@ namespace TOJam2011Game
 
             origin = new Vector2(0, 0);
 
+            scale = 1.0f;
+
         }
 
 
@@ -89,8 +91,10 @@ namespace TOJam2011Game
 
         public override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
 
+          //  spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+
+            base.Draw(gameTime);
 
         }
 
@@ -98,8 +102,8 @@ namespace TOJam2011Game
         public bool CheckCollision(Vector2 otherpos, int W, int H)
         {
 
-            Rectangle myRec = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            Rectangle otherRec = new Rectangle((int)otherpos.X, (int)otherpos.Y, W, H);
+            Rectangle myRec = new Rectangle((int)position.X - texture.Width/2, (int)position.Y - texture.Height/2, texture.Width, texture.Height);
+            Rectangle otherRec = new Rectangle((int)otherpos.X - W/2, (int)otherpos.Y - H/2, W, H);
 
             if (myRec.Intersects(otherRec))
                 return true;

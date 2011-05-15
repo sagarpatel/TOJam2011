@@ -62,7 +62,8 @@ namespace TOJam2011Game
         {
             if (isAlive)
             {
-                spriteBatch.Draw(texture, position, Color.White);
+                spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+
             }
 
             base.Draw(gameTime);
