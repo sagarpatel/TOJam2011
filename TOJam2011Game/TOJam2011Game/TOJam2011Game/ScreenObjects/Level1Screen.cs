@@ -23,6 +23,7 @@ namespace TOJam2011Game
  
         TitleObject iTitle;
         TitleObject iiTitle;
+        TitleObject iiiTitle;
 
         bool isintroComplete;
 
@@ -37,18 +38,23 @@ namespace TOJam2011Game
                       
             // set up level content
             iTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
-            iTitle.targetPosition = new Vector2(700, 75);
+            iTitle.targetPosition = new Vector2(700, 150);
             iTitle.position = -iTitle.targetPosition;
 
-            iiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/InfinitelyV2"));
+            iiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/ImprobableV2"));
             iiTitle.position = GenerateRandomPositionOutside();
             iiTitle.rotation = 0f;
             iiTitle.targetPosition = new Vector2(300, 300);
             iiTitle.targetRotation = 20f * (float)Math.PI;
 
 
+            iiiTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/IncertitudeV1"));
+            iiiTitle.targetPosition = new Vector2(600, 500);
+            iiiTitle.position = -iiiTitle.targetPosition;
+
             Game.Components.Add(iTitle);
             Game.Components.Add(iiTitle);
+            Game.Components.Add(iiiTitle);
             
         }
 
@@ -166,7 +172,14 @@ namespace TOJam2011Game
                 // check is second message has arrived
                 if (Math.Round((double)iiTitle.position.X) == (double)iiTitle.targetPosition.X)
                 {
-                    return true;
+                    //send third message
+                    iiiTitle.position.X = MathHelper.Lerp(iiiTitle.position.X, iiiTitle.targetPosition.X, 0.05f);
+                    iiiTitle.position.Y = MathHelper.Lerp(iiiTitle.position.Y, iiiTitle.targetPosition.Y, 0.05f);
+                    //check if third message has arrived
+                    if (Math.Round((double)iiiTitle.position.X) == (double)iiiTitle.targetPosition.X)
+                    {
+                        return true;
+                    }
                 }
 
             }

@@ -39,19 +39,19 @@ namespace TOJam2011Game
             position = new Vector2(10, 10);
             speed = 2f;
             friction = 0.15f;
-            maxcount_weapon1 = 10;
-            maxcount_weapon2 = 20;
+            maxcount_weapon1 = 100;
+            maxcount_weapon2 = 200;
             //Higher number, slower the rate
             fireRate_weapon1 = 300;
             fireRate_weapon2 = 100;
 
-            velocity_weapon1 = new Vector2(10,0);
-            velocity_weapon2 = new Vector2(20,0);
+            velocity_weapon1 = new Vector2(0,-10);
+            velocity_weapon2 = new Vector2(0,-20);
 
             weapon1 = new WeaponObject[maxcount_weapon1];
             for (int i = 0; i < maxcount_weapon1; i++)
             {
-                weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
+                weapon1[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLshotV1"));
                 weapon1[i].velocity = velocity_weapon1;
                 weapon1[i].fireRate = fireRate_weapon1;
                 Game.Components.Add(weapon1[i]);
@@ -61,7 +61,7 @@ namespace TOJam2011Game
             weapon2 = new WeaponObject[maxcount_weapon2];
             for (int i = 0; i < maxcount_weapon2; i++)
             {
-                weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLV3"));
+                weapon2[i] = new WeaponObject(game, sB, Game.Content.Load<Texture2D>("Sprites/GCLshotV1"));
                 weapon2[i].velocity = velocity_weapon2;
                 weapon2[i].fireRate = fireRate_weapon2;
                 Game.Components.Add(weapon2[i]);
@@ -94,7 +94,7 @@ namespace TOJam2011Game
         {
 
 
-            texture = Game.Content.Load<Texture2D>("Sprites/GCLV3");
+            texture = Game.Content.Load<Texture2D>("Sprites/GCLV4");
             origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
 
             position = new Vector2(200, 100);
