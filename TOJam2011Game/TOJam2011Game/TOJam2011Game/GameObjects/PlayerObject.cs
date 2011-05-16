@@ -230,6 +230,8 @@ namespace TOJam2011Game
         {
             //Button inputs
 
+            KeyboardState keybState = Keyboard.GetState();
+
             if (inputHandler.gamepadState.Buttons.X == ButtonState.Pressed)
             {
                 FireWeapon(1, gameTime);
@@ -241,12 +243,42 @@ namespace TOJam2011Game
                 
             }
 
+            if (keybState.IsKeyDown(Keys.A))
+            {
+                FireWeapon(2, gameTime);
+            }
+
+
 
             if (isMoveable)
             {
                 ///PV
+                ///
+                float speed = 1f;
                 velocity.X += inputHandler.gamepadState.ThumbSticks.Left.X;
                 velocity.Y -= inputHandler.gamepadState.ThumbSticks.Left.Y;
+
+                if (keybState.IsKeyDown(Keys.Left))
+                {
+                    velocity.X -= speed;
+                }
+                if (keybState.IsKeyDown(Keys.Right))
+                {
+                    velocity.X += speed;
+                }
+
+                if (keybState.IsKeyDown(Keys.Up))
+                {
+                    velocity.Y -= speed;
+                }
+                if (keybState.IsKeyDown(Keys.Down))
+                {
+                    velocity.Y += speed;
+                }
+
+
+
+
             }
 
         }
