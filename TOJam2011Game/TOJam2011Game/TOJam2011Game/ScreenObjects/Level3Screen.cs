@@ -40,8 +40,8 @@ namespace TOJam2011Game
 
             mainPlayer = GameFlowManager.player1;
 
-            PE1 = new ParticleEngine(sB, Game.Content.Load<Texture2D>("Sprites/goatV1"), 2);
-            PE1.MaxParticles = 100;
+            PE1 = new ParticleEngine(sB, Game.Content.Load<Texture2D>("Sprites/goatV1"), 1);
+            PE1.MaxParticles = 1000;
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
 
@@ -82,6 +82,18 @@ namespace TOJam2011Game
 
             }
 
+
+            foreach (EnemyObject e in feynmanLecture.enemies2)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
+            if (feynmanLecture.position.Y > Game1.screenHeight)
+            {
+                PE1.AddExplosion(PE1.ParticleArray, PE1.MaxParticles, mainPlayer.position, PE1.ExplosionSize, gameTime, mainPlayer.velocity);
+            }
+
             base.Update(gameTime);
         }
 
@@ -92,7 +104,7 @@ namespace TOJam2011Game
 
             //  spriteBatch.Draw stuff here
 
-            spriteBatch.DrawString(spriteFont1, "test3", new Vector2(500, 0), Color.Green);
+        //    spriteBatch.DrawString(spriteFont1, "test3", new Vector2(500, 0), Color.Green);
 
             PE1.DrawExplosion(PE1.ParticleArray, spriteBatch, gameTime);
 

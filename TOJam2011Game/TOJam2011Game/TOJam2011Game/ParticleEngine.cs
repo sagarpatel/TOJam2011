@@ -123,11 +123,11 @@ namespace TOJam2011Game
                     ParticleInitialVelocityScale = 3.0f;
                     ParticleAcceleration = 10.0f; // Used in AddExplosionParticle()
                     ParticleToPlayerAccelerationScale = 100.0f;
-                    ExplosionSize = 150f;
+                    ExplosionSize = 300f;
                     ConeWidth = 360;
                     ParticleMaxAge = 500f;
                     ParticleAgeOffset = 4000f;
-                    MaxParticles = 1000;
+                    MaxParticles = 5000;
                     ParticleArraySize = 10000;
                     ParticleArray = new ParticleData[ParticleArraySize];
 

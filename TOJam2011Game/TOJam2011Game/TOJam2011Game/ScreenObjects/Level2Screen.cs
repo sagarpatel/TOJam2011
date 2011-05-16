@@ -266,7 +266,7 @@ namespace TOJam2011Game
 
             //  spriteBatch.Draw stuff here
 
-            spriteBatch.DrawString(spriteFont1, "test2", new Vector2(400, 0), Color.Green);
+            //spriteBatch.DrawString(spriteFont1, "test2", new Vector2(400, 0), Color.Green);
 
             PE1.DrawExplosion(PE1.ParticleArray, spriteBatch, gameTime);
 
@@ -321,6 +321,7 @@ namespace TOJam2011Game
                                 
                                 if (gameObject.customRGBA > 254)
                                 {
+
                                     PE1.AddExplosion(PE1.ParticleArray, PE1.MaxParticles, gameObject.position, PE1.ExplosionSize, gameTime, w.velocity);
                                     mainPlayer.activeTextureID = 11;
                                     gameObject.isAlive = false;

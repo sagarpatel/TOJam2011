@@ -25,6 +25,8 @@ namespace TOJam2011Game
         TitleObject iiTitle;
         TitleObject iiiTitle;
 
+        Texture2D toj;
+
         bool isintroComplete;
         bool istutorialComplete;
         bool isPlayerLaunched;
@@ -86,6 +88,8 @@ namespace TOJam2011Game
 
             SoundEffect.MasterVolume = 0.08f;
             toilet_flush.Play();
+
+            toj = Game.Content.Load<Texture2D>("Sprites/TOJstamp");
         }
 
 
@@ -197,7 +201,7 @@ namespace TOJam2011Game
         {
 
           //  spriteBatch.Draw stuff here
-            spriteBatch.DrawString(spriteFont1,"test1", new Vector2(400, 0), Color.Green);
+            spriteBatch.Draw(toj, new Vector2(100, 100), Color.White);
                 
             base.Draw(gameTime);
         }

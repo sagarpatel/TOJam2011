@@ -25,12 +25,17 @@ namespace TOJam2011Game
         public TimeSpan timeSpan;
 
         public EnemyObject[] enemies1;
+        public EnemyObject[] enemies2;
+        
 
         public int maxenemies;
 
         bool isat8secSpawed;
+        bool isat14secSpawed;
 
         int enemycounter;
+
+        Texture2D soph;
         
         public FeynmanObject(Game game, SpriteBatch sB):base(game,sB)
         {
@@ -39,6 +44,9 @@ namespace TOJam2011Game
             isAlive = true;
             isKilled = false;
             isat8secSpawed = false;
+            isat14secSpawed = false;
+
+
             enemycounter = 0;
 
             feynmanVid = Game.Content.Load<Video>("Videos/F1v3");
@@ -47,7 +55,7 @@ namespace TOJam2011Game
             timeSpan = new TimeSpan();
 
 
-            maxenemies = 7;
+            maxenemies = 17;
 
             enemies1 = new EnemyObject[maxenemies];
             for(int i =0;i<maxenemies;i++)
@@ -55,6 +63,14 @@ namespace TOJam2011Game
                 enemies1[i] = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Enemies/42V1"));
                 enemies1[i].isWallBouncing = true;
                 Game.Components.Add(enemies1[i]);
+            }
+
+            enemies2 = new EnemyObject[maxenemies];
+            for (int i = 0; i < maxenemies; i++)
+            {
+                enemies2[i] = new EnemyObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Enemies/soph"));
+                enemies2[i].isWallBouncing = true;
+                Game.Components.Add(enemies2[i]);
             }
 
 
@@ -85,8 +101,41 @@ namespace TOJam2011Game
                 if (enemycounter == maxenemies)
                 {
                     isat8secSpawed = true;
+
+
                 }
             }
+
+            ///soph
+
+            if (timeSpan > TimeSpan.FromSeconds(14) && isat14secSpawed == false)
+            {
+                foreach (EnemyObject enemy in enemies2)
+                {
+                    if (enemy.isAlive == false)
+                    {
+                        enemy.isAlive = true;
+                        enemy.velocity = GenerateRandomVelocity();
+                        enemy.position = position;
+                        enemycounter++;
+                        break;
+                    }
+                }
+
+                if (enemycounter == maxenemies)
+                {
+                    isat14secSpawed = true;
+
+    
+                }
+            }
+
+
+
+
+
+
+
 
 
 
