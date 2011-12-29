@@ -106,7 +106,7 @@ namespace TOJam2011Game
                 
 
                 timeCounter += gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (timeCounter > 3000)
+                if (timeCounter > 5000)
                 {
 
                     Game.Components.Remove(level2Screen);
@@ -121,7 +121,7 @@ namespace TOJam2011Game
                 
             }
 
-
+            
 
             base.Update(gameTime);
         }

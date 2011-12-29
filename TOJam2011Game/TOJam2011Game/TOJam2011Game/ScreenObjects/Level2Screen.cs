@@ -46,29 +46,41 @@ namespace TOJam2011Game
 
             mainPlayer = GameFlowManager.player1;
 
+            int maxHP = 20;
+
             canyouseemeTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/canyouseemeV1"));
             canyouseemeTitle.position = new Vector2(400, 100);
+            canyouseemeTitle.initialHP = maxHP;
+            canyouseemeTitle.HP = maxHP;
 
             IPreadytolearnTitle = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/IPreadytolearn"));
             IPreadytolearnTitle.position = new Vector2(600, 300);
+            IPreadytolearnTitle.initialHP = maxHP;
+            IPreadytolearnTitle.HP = maxHP;
 
             lvl2warning1 = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/lv2warning1"));
             lvl2warning1.position = new Vector2(100 + lvl2warning1.texture.Width/2, 100 + lvl2warning1.texture.Height/2);
+            lvl2warning1.initialHP = maxHP;
+            lvl2warning1.HP = maxHP;
 
             keepafloat = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/keepafloat"));
             keepafloat.position = new Vector2(300 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
+            keepafloat.initialHP = maxHP;
+            keepafloat.HP = maxHP;
 
             letsstartthelearning = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/letsstartthelearning"));
             letsstartthelearning.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
-
+            letsstartthelearning.initialHP = maxHP;
+            letsstartthelearning.HP = maxHP;
 
             forscience = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/forscience"));
-            forscience.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 100 + lvl2warning1.texture.Height / 2);
-
+            forscience.position = new Vector2(200 + lvl2warning1.texture.Width / 2, 200 + lvl2warning1.texture.Height / 2);
+            forscience.initialHP = maxHP;
+            forscience.HP = maxHP;
 
             apertureascii = new TitleObject(game, sB, Game.Content.Load<Texture2D>("Sprites/Level2/apertureasciiV3"));
             apertureascii.position = new Vector2(10+ apertureascii.texture.Width / 2, 50 + lvl2warning1.texture.Height / 2);
-
+      
 
             spriteFont1 = Game.Content.Load<SpriteFont>("Fonts/SF1");
 
@@ -251,8 +263,38 @@ namespace TOJam2011Game
 
             }
 
+            if (forscience.isAlive == false)
+            {
+                Game.Components.Remove(canyouseemeTitle);
+                canyouseemeTitle.Dispose();
+
+                Game.Components.Remove(IPreadytolearnTitle);
+                IPreadytolearnTitle.Dispose();
+
+                Game.Components.Remove(keepafloat);
+                keepafloat.Dispose();
+
+
+                Game.Components.Remove(letsstartthelearning);
+                letsstartthelearning.Dispose();
+
+
+                Game.Components.Remove(lvl2warning1);
+                lvl2warning1.Dispose();
+
+                Game.Components.Remove(forscience);
+                forscience.Dispose(); 
+
+            }
 
             PE1.UpdateParticles(PE1.ParticleArray, gameTime, (mainPlayer.position ));
+
+            if (mainPlayer.IsInsideScreen(mainPlayer.textureList[mainPlayer.activeTextureID]) == false)
+            {
+                mainPlayer.position = new Vector2(Game1.screenWidth / 2, Game1.screenHeight - 100);
+
+            }
+
 
             base.Update(gameTime);
 
@@ -275,7 +317,7 @@ namespace TOJam2011Game
         }
 
 
-        public void Handle_and_CheckWeaponCollision(GameObject gameObject)
+        public void Handle_and_CheckWeaponCollision(TitleObject gameObject)
         {
             if (gameObject.isAlive)
             {
@@ -288,10 +330,12 @@ namespace TOJam2011Game
                             if (gameObject.CheckCollision(w.position, w.texture.Width, w.texture.Height))
                             {
                                 w.isAlive = false;
-                                gameObject.isAlive = false;
-                                gameObject.isKilled = true;
-                                Game.Components.Remove(gameObject);
-                                gameObject.Dispose();
+                                gameObject.HP--;
+                                if (gameObject.HP == 0)
+                                {
+                                   // Game.Components.Remove(gameObject);
+                                  //  gameObject.Dispose();
+                                }
                             }
                         }
                     }
@@ -318,7 +362,7 @@ namespace TOJam2011Game
                                 gameObject.rotation -= 0.003f;
                                 totalAngularVelocity -= 0.003f;
 
-                                
+
                                 if (gameObject.customRGBA > 254)
                                 {
 
@@ -330,6 +374,7 @@ namespace TOJam2011Game
                                     gameObject.Dispose();
                                 }
                             }
+
                         }
                     }
                 }

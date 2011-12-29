@@ -32,11 +32,15 @@ namespace TOJam2011Game
         float gravity;
         float bulletPush;
 
+        
+
         public Level3Screen(Game game, SpriteBatch sB): base(game, sB)
         {
             isActive = true;
             isCompleted = false;
             timeCounter = 0;
+
+            
 
             mainPlayer = GameFlowManager.player1;
 
@@ -89,9 +93,42 @@ namespace TOJam2011Game
 
             }
 
+            foreach (EnemyObject e in feynmanLecture.enemies3)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
+
+            foreach (EnemyObject e in feynmanLecture.enemies4)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
+
+            foreach (EnemyObject e in feynmanLecture.enemies5)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
+            foreach (EnemyObject e in feynmanLecture.enemies6)
+            {
+                Handle_and_CheckWeaponCollision(e);
+
+            }
+
+
             if (feynmanLecture.position.Y > Game1.screenHeight)
             {
                 PE1.AddExplosion(PE1.ParticleArray, PE1.MaxParticles, mainPlayer.position, PE1.ExplosionSize, gameTime, mainPlayer.velocity);
+            }
+
+            if (mainPlayer.IsInsideScreen(mainPlayer.textureList[mainPlayer.activeTextureID]) == false)
+            {
+                mainPlayer.position = new Vector2(Game1.screenWidth / 2, Game1.screenHeight - 100);
+
             }
 
             base.Update(gameTime);

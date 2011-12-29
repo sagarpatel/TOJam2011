@@ -109,7 +109,7 @@ namespace TOJam2011Game
                     ParticleAcceleration = 50f; // Used in AddExplosionParticle()
                     ExplosionSize = 50f;
                     ParticleMaxAge = 750.0f;
-                    MaxParticles = 100;
+                    MaxParticles = 400;
                     ParticleArraySize = 1000;
                     ParticleArray = new ParticleData[ParticleArraySize];
 
@@ -127,7 +127,7 @@ namespace TOJam2011Game
                     ConeWidth = 360;
                     ParticleMaxAge = 500f;
                     ParticleAgeOffset = 4000f;
-                    MaxParticles = 5000;
+                    MaxParticles = 400;
                     ParticleArraySize = 10000;
                     ParticleArray = new ParticleData[ParticleArraySize];
 

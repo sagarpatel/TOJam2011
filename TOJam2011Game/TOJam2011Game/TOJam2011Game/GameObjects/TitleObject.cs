@@ -26,6 +26,10 @@ namespace TOJam2011Game
         public float initialShake;
         public bool isWallBouncing;
 
+        public int HP;
+        public int initialHP;
+
+
         public TitleObject(Game game,SpriteBatch sB,Texture2D passedTexture):base(game,sB)
         {
             isKilled = false;
@@ -33,6 +37,8 @@ namespace TOJam2011Game
             texture = passedTexture;
             initialShake = 0f;
             isWallBouncing = false;
+            initialHP = 10;
+            HP = initialHP;
         }
 
 
@@ -55,6 +61,12 @@ namespace TOJam2011Game
             }
 
             UpdatePV();
+
+            if (HP < 1)
+            {
+                this.isAlive = false;
+                this.isKilled = true;
+            }
           //  base.Update(gameTime);
 
         }
@@ -89,7 +101,11 @@ namespace TOJam2011Game
                 }
                 else
                 {
-                    spriteBatch.Draw(texture, position, null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
+                    int cValue = (int)(256f * Math.Pow((double)(float)((float)HP / (float)initialHP) ,2));
+                    Color brightness = new Color(cValue,cValue,cValue,256);
+                    if (HP == 2 || HP == 1)
+                        brightness = Color.White;
+                    spriteBatch.Draw(texture, position, null, brightness, rotation, new Vector2(texture.Width / 2, texture.Height / 2), scale, SpriteEffects.None, 0);
                 }
             }
 

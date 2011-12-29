@@ -151,7 +151,7 @@ namespace TOJam2011Game
                 velocity.X = -velocity.X;
             }
 
-            if (position.Y - tex.Height/2 < 5 || position.Y + tex.Height / 2 > Game1.screenHeight)
+            if (position.Y - tex.Height/2 < 15 || position.Y + tex.Height / 2 > Game1.screenHeight)
             {
                 velocity.Y = -velocity.Y;
             }

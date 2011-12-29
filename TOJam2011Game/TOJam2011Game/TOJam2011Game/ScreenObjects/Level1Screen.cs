@@ -223,8 +223,7 @@ namespace TOJam2011Game
                             if (iTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
                             {
                                 w.isAlive = false;
-                                iTitle.isAlive = false;
-                                iTitle.isKilled = true;
+                                iTitle.HP--;
                             }
                         }
                         //for title2
@@ -233,8 +232,7 @@ namespace TOJam2011Game
                             if (iiTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
                             {
                                 w.isAlive = false;
-                                iiTitle.isAlive = false;
-                                iiTitle.isKilled = true;
+                                iiTitle.HP--;
                             }
                         }
                         //for title3
@@ -243,8 +241,7 @@ namespace TOJam2011Game
                             if (iiiTitle.CheckCollision(w.position, w.texture.Width, w.texture.Height))
                             {
                                 w.isAlive = false;
-                                iiiTitle.isAlive = false;
-                                iiiTitle.isKilled = true;
+                                iiiTitle.HP--;
                             }
                         }
                     }
